@@ -9,7 +9,7 @@ export const projectsData: Project[] = [
     detailedDescription: "Built a full-stack SaaS content engine using Gemini API and the open-source FLUX model to automate long-form article writing and high-fidelity text-to-image synthesis pipelines. Integrated Clerk Auth via an asynchronous webhook architecture, maintaining sub-120ms dashboard synchronization latency across multi-tier billing-enabled user profiles. Optimized serverless PostgreSQL schemas via Neon DB connection pooling, handling complex concurrent dashboard data requests with consistent sub-100ms database latency. Designed an asynchronous asset processing pipeline utilizing Cloudinary API for on-the-fly image optimization and transformation, cutting overall client-side asset load times by 35%.",
     tags: ["React.js", "Node.js", "Express.js", "Neon DB (PostgreSQL)", "ClerkAuth", "Cloudinary", "Gemini API", "Tailwind CSS"],
     metrics: { label: "Asset Load Cut", value: "35%" },
-    githubLink: "https://github.com",
+    githubLink: "https://github.com/anmoltriv/ContentAI",
     featured: true
   },
   {
