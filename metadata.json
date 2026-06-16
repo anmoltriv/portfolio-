@@ -1,0 +1,6 @@
+{
+  "name": "Anmol Trivedi Portfolio",
+  "description": "Interactive, premium minimalist portfolio of Anmol Trivedi, full-stack developer and designer from NIT Rourkela, featuring an integrated AI assistant clone.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
