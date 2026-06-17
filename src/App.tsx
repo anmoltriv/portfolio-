@@ -375,11 +375,12 @@ export default function App() {
     "aesthetics and functionality."
   ];
   const [taglineIndex, setTaglineIndex] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTaglineIndex((prev) => (prev + 1) % taglines.length);
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -391,49 +392,114 @@ export default function App() {
       <div className={`absolute top-[35%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[160px] pointer-events-none transition-all duration-1000 ${accentGlow === "emerald" ? "bg-teal-950/20" : accentGlow === "blue" ? "bg-indigo-950/20" : "bg-yellow-950/15"}`}></div>
       <div className={`absolute bottom-[5%] left-[10%] w-[45%] h-[45%] rounded-full blur-[150px] pointer-events-none transition-all duration-1000 ${accentGlow === "emerald" ? "bg-[#0b1210]/20" : accentGlow === "blue" ? "bg-[#091122]/20" : "bg-[#1c1208]/20"}`}></div>
 
-      {/* Modern High-End Fixed Top Navigation Bar */}
       <header className="fixed top-0 left-0 w-full z-50 py-4 backdrop-blur-md bg-[#050505]/60 border-b border-white/5 transition-all duration-300">
-        <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center gap-3 group">
-            <div className="relative">
-              <span className={`text-2xl font-black tracking-tighter uppercase text-white hover:${glowConfig[accentGlow].text} transition cursor-default`}>
-                AT
-              </span>
-              <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${glowConfig[accentGlow].bg} scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></span>
-            </div>
-            <span className="hidden sm:inline-block text-[10px] tracking-[0.25em] font-mono text-white/30 uppercase mt-1">
-              • CORE UNIT
+      <div className="w-full max-w-7xl mx-auto px-6 flex justify-between items-center">
+        
+        {/* Logo Section */}
+        <div className="flex items-center gap-3 group">
+          <div className="relative">
+            <span className={`text-2xl font-black tracking-tighter uppercase text-white hover:${glowConfig[accentGlow].text} transition cursor-default`}>
+              AT
             </span>
+            <span className={`absolute -bottom-1 left-0 w-full h-[2px] ${glowConfig[accentGlow].bg} scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></span>
           </div>
+          <span className="hidden sm:inline-block text-[10px] tracking-[0.25em] font-mono text-white/30 uppercase mt-1">
+            • CORE UNIT
+          </span>
+        </div>
 
-          {/* Minimal Pill Navigation */}
-          <div className="bg-white/[0.03] border border-white/10 px-5 py-2.5 rounded-full backdrop-blur-xl flex gap-6 sm:gap-8 text-[11px] uppercase tracking-widest font-semibold text-white/40">
-            <a href="#hero-screen" className="text-white hover:text-white transition duration-200">
-              Home
-            </a>
-            <a href="#bento" className="hover:text-white transition duration-200">
-              Identity
-            </a>
-            <a href="#projects" className="hover:text-white transition duration-200">
-              Showcase
-            </a>
-            <a href="#twin-assistant" className={`hover:text-white transition duration-200 flex items-center gap-1.5 ${glowConfig[accentGlow].text} hover:opacity-80`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${glowConfig[accentGlow].ping} animate-pulse`}></span>
-              Clone Chat
-            </a>
-          </div>
+        {/* Desktop Minimal Pill Navigation */}
+        <nav className="hidden md:flex bg-white/[0.03] border border-white/10 px-5 py-2.5 rounded-full backdrop-blur-xl gap-8 text-[11px] uppercase tracking-widest font-semibold text-white/40">
+          <a href="#hero-screen" className="text-white hover:text-white transition duration-200">
+            Home
+          </a>
+          <a href="#bento" className="hover:text-white transition duration-200">
+            Identity
+          </a>
+          <a href="#projects" className="hover:text-white transition duration-200">
+            Showcase
+          </a>
+          <a href="#twin-assistant" className={`hover:text-white transition duration-200 flex items-center gap-1.5 ${glowConfig[accentGlow].text} hover:opacity-80`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${glowConfig[accentGlow].ping} animate-pulse`}></span>
+            Clone Chat
+          </a>
+        </nav>
 
-          {/* Direct Connect Action */}
+        {/* Desktop Direct Connect Action */}
+        <div className="hidden md:block">
           <a
             href="#twin-assistant"
-            className={`hidden md:flex bg-white text-black active:scale-95 transition-all text-[11px] font-bold uppercase tracking-wider px-6 py-2.5 rounded-full hover:text-black duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.05)] hover:${glowConfig[accentGlow].bg}`}
+            className={`bg-white text-black active:scale-95 transition-all text-[11px] font-bold uppercase tracking-wider px-6 py-2.5 rounded-full hover:text-black duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.05)] hover:${glowConfig[accentGlow].bg}`}
           >
             Enquire
           </a>
         </div>
-      </header>
 
-      {/* Screen 1: Full Viewport Cover (100dvh Landing) */}
+        {/* Mobile Menu Button Container */}
+        <div className="flex md:hidden items-center">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="text-white focus:outline-none p-2 z-50 relative"
+            aria-label="Toggle Menu"
+          >
+            {/* Animated Hamburger / Close Icon */}
+            <div className="w-6 h-5 flex flex-col justify-between relative overflow-hidden">
+              <span className={`w-6 h-[2px] bg-white transition-all duration-300 origin-left ${isMenuOpen ? "rotate-45 translate-x-[4px] -translate-y-[1px]" : ""}`}></span>
+              <span className={`w-6 h-[2px] bg-white transition-all duration-300 ${isMenuOpen ? "-translate-x-full opacity-0" : ""}`}></span>
+              <span className={`w-6 h-[2px] bg-white transition-all duration-300 origin-left ${isMenuOpen ? "-rotate-45 translate-x-[4px] translate-y-[1px]" : ""}`}></span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+
+      {/* Mobile Drawer Overlay */}
+      <div 
+        className={`fixed inset-0 h-screen w-screen bg-[#050505]/95 backdrop-blur-2xl transition-all duration-300 md:hidden flex flex-col items-center justify-center gap-8 ${
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <nav className="flex flex-col items-center gap-6 text-sm uppercase tracking-[0.2em] font-semibold text-white/50">
+          <a 
+            href="#hero-screen" 
+            onClick={() => setIsMenuOpen(false)} 
+            className="text-white hover:text-white transition duration-200"
+          >
+            Home
+          </a>
+          <a 
+            href="#bento" 
+            onClick={() => setIsMenuOpen(false)} 
+            className="hover:text-white transition duration-200"
+          >
+            Identity
+          </a>
+          <a 
+            href="#projects" 
+            onClick={() => setIsMenuOpen(false)} 
+            className="hover:text-white transition duration-200"
+          >
+            Showcase
+          </a>
+          <a 
+            href="#twin-assistant" 
+            onClick={() => setIsMenuOpen(false)} 
+            className={`hover:text-white transition duration-200 flex items-center gap-2 ${glowConfig[accentGlow].text}`}
+          >
+            <span className={`w-2 h-2 rounded-full ${glowConfig[accentGlow].ping} animate-pulse`}></span>
+            Clone Chat
+          </a>
+          
+          <a
+            href="#twin-assistant"
+            onClick={() => setIsMenuOpen(false)}
+            className="mt-4 bg-white text-black text-[11px] font-bold uppercase tracking-wider px-8 py-3 rounded-full"
+          >
+            Enquire
+          </a>
+        </nav>
+      </div>
+    </header>      {/* Screen 1: Full Viewport Cover (100dvh Landing) */}
       <div id="hero-screen" className="w-full h-[100dvh] flex flex-col justify-between pt-28 pb-6 relative overflow-hidden select-none z-10">
 
         {/* Placeholder to keep layout balance now that header is fixed */}
