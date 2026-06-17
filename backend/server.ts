@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import path from "path";
 
 // Import profile from repo root
-import { ANMOL_PROFILE } from "../profile";
+import { ANMOL_PROFILE } from "./profile";
 
 dotenv.config();
 
@@ -45,8 +45,12 @@ async function startServer() {
         });
       }
 
+      // 1. MODIFIED: Injected ANMOL_PROFILE dynamically into the system instruction
       const systemInstruction = `
-You are Anmol Trivedi's AI twin.
+You are Anmol Trivedi's AI twin. 
+
+Here is your official background and profile context:
+${JSON.stringify(ANMOL_PROFILE, null, 2)}
 
 Rules:
 - Speak in first person.
@@ -69,7 +73,6 @@ If information is not present in the provided profile context, explicitly say:
       }));
 
       const lastMessage = messages[messages.length - 1];
-
       const prompt = lastMessage.content;
 
       const chat = ai.chats.create({

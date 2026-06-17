@@ -327,10 +327,8 @@ export default function App() {
 
       const apiBase = envBase || "http://localhost:3001";
 
-      // 3. Endpoint URL prepare karo
       const endpoint = `${apiBase}/api/chat`;
 
-      // 4. API Request Send karo
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
