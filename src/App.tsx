@@ -150,25 +150,25 @@ function TechBadge({ tag, glowAccent }: TechBadgeProps) {
 
 export default function App() {
   useEffect(() => {
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
-  }
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
 
-  // If the URL carries a hash (e.g. left over from clicking a nav link like
-  // #twin-assistant before reloading), strip it so the browser doesn't
-  // natively auto-scroll to that section's anchor on load.
-  if (window.location.hash) {
-    window.history.replaceState(null, "", window.location.pathname + window.location.search);
-  }
+    // If the URL carries a hash (e.g. left over from clicking a nav link like
+    // #twin-assistant before reloading), strip it so the browser doesn't
+    // natively auto-scroll to that section's anchor on load.
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
 
-  window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 
-  // Images/fonts loading after the initial paint can shift layout and cause
-  // some browsers to re-apply anchor scrolling. Re-assert the top position
-  // once more after that settles.
-  const raf = requestAnimationFrame(() => window.scrollTo(0, 0));
-  return () => cancelAnimationFrame(raf);
-}, []);
+    // Images/fonts loading after the initial paint can shift layout and cause
+    // some browsers to re-apply anchor scrolling. Re-assert the top position
+    // once more after that settles.
+    const raf = requestAnimationFrame(() => window.scrollTo(0, 0));
+    return () => cancelAnimationFrame(raf);
+  }, []);
   const [activeTab, setActiveTab] = useState<"projects" | "skills" | "experience">("projects");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
@@ -323,7 +323,15 @@ export default function App() {
         content: msg.content
       }));
 
-      const res = await fetch("/api/chat", {
+      const envBase = (import.meta as any).env?.VITE_API_URL;
+
+      const apiBase = envBase || "http://localhost:3001";
+
+      // 3. Endpoint URL prepare karo
+      const endpoint = `${apiBase}/api/chat`;
+
+      // 4. API Request Send karo
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: chatPayload })
@@ -332,7 +340,6 @@ export default function App() {
       if (!res.ok) {
         throw new Error("Failure contacting Anmol's brain");
       }
-
       const data = await res.json();
 
       const assistantMsg: ChatMessage = {
@@ -537,10 +544,10 @@ export default function App() {
 
           {/* Profile Card displaying premium portrait */}
           <div className={`md:col-span-1 bg-white/[0.02] border border-white/10 rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 group relative overflow-hidden hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${accentGlow === "emerald"
-              ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
-              : accentGlow === "blue"
-                ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
-                : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
+            ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
+            : accentGlow === "blue"
+              ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
+              : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
             }`}>
             <div className="absolute inset-0 bg-radial-gradient from-white/[0.02] to-transparent pointer-events-none"></div>
 
@@ -553,10 +560,10 @@ export default function App() {
             >
               {/* Subtle ambient outer glow matching active theme mode */}
               <div className={`absolute -inset-1 blur-md rounded-xl transition-all duration-700 opacity-25 group-hover:opacity-75 pointer-events-none animate-pulse-slow ${accentGlow === "emerald"
-                  ? "bg-emerald-500/20 shadow-[0_0_20px_#10b981]"
-                  : accentGlow === "blue"
-                    ? "bg-blue-500/20 shadow-[0_0_20px_#3b82f6]"
-                    : "bg-yellow-500/20 shadow-[0_0_20px_#f59e0b]"
+                ? "bg-emerald-500/20 shadow-[0_0_20px_#10b981]"
+                : accentGlow === "blue"
+                  ? "bg-blue-500/20 shadow-[0_0_20px_#3b82f6]"
+                  : "bg-yellow-500/20 shadow-[0_0_20px_#f59e0b]"
                 }`} />
 
               <div className={`absolute inset-0 opacity-40 bg-radial-gradient ${glowConfig[accentGlow].radial} to-transparent z-10 pointer-events-none`}></div>
@@ -620,10 +627,10 @@ export default function App() {
 
           {/* Philosophy Card - Central Focus */}
           <div className={`md:col-span-2 bg-[#0c0c0c] border border-white/10 rounded-2xl p-8 flex flex-col justify-between transition-all duration-500 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${accentGlow === "emerald"
-              ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
-              : accentGlow === "blue"
-                ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
-                : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
+            ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
+            : accentGlow === "blue"
+              ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
+              : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
             }`}>
 
             {/* Pulsing light ring based on active accent selection */}
@@ -667,10 +674,10 @@ export default function App() {
 
             {/* Available Status Block */}
             <div className={`bg-white/[0.02] border border-white/10 rounded-2xl p-5 flex items-center gap-3.5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] ${accentGlow === "emerald"
-                ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30 hover:bg-emerald-950/15"
-                : accentGlow === "blue"
-                  ? "hover:shadow-blue-500/5 hover:border-blue-500/30 hover:bg-blue-950/15"
-                  : "hover:shadow-yellow-500/5 hover:border-yellow-500/30 hover:bg-yellow-950/15"
+              ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30 hover:bg-emerald-950/15"
+              : accentGlow === "blue"
+                ? "hover:shadow-blue-500/5 hover:border-blue-500/30 hover:bg-blue-950/15"
+                : "hover:shadow-yellow-500/5 hover:border-yellow-500/30 hover:bg-yellow-950/15"
               }`}>
               <div className="relative flex h-3 w-3">
                 <span className={`animate-ping absolute inline-flex h-full w-full rounded-full ${glowConfig[accentGlow].ping} opacity-75`}></span>
@@ -684,10 +691,10 @@ export default function App() {
 
             {/* Direct Copy Action Block */}
             <div className={`bg-white/[0.02] border border-white/10 rounded-2xl p-5 flex-1 flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${accentGlow === "emerald"
-                ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
-                : accentGlow === "blue"
-                  ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
-                  : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
+              ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
+              : accentGlow === "blue"
+                ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
+                : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
               }`}>
               <div>
                 <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-mono block mb-1">Email Contact</span>
@@ -718,10 +725,10 @@ export default function App() {
 
             {/* Fast Resume Link to emphasize pre-final student preparedness */}
             <div className={`bg-white/[0.02] border border-white/10 rounded-2xl p-4 flex items-center justify-between transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:bg-white/[0.04] hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] ${accentGlow === "emerald"
-                ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
-                : accentGlow === "blue"
-                  ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
-                  : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
+              ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
+              : accentGlow === "blue"
+                ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
+                : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
               }`} onClick={() => handleSendMessage("Tell me about your tech experiences and resume info")}>
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-orange-950/20 text-orange-400 border border-orange-500/10">
@@ -767,10 +774,10 @@ export default function App() {
               key={project.id}
               onClick={() => setSelectedProject(project)}
               className={`bg-white/[0.0125] border border-white/10 rounded-2xl p-6 transition-all duration-500 cursor-pointer flex flex-col justify-between group h-[260px] relative overflow-hidden hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${accentGlow === "emerald"
-                  ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
-                  : accentGlow === "blue"
-                    ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
-                    : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
+                ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
+                : accentGlow === "blue"
+                  ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
+                  : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
                 }`}
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.01] rounded-bl-full pointer-events-none group-hover:bg-white/[0.03] transition-colors"></div>
@@ -814,7 +821,7 @@ export default function App() {
       </motion.section>
 
       {/* 2. Skills Section */}
-       <SkillsSection glowConfig={glowConfig} accentGlow={accentGlow} />
+      <SkillsSection glowConfig={glowConfig} accentGlow={accentGlow} />
 
       {/* 3. EXPERIENCE SECTION */}
       <motion.section
@@ -838,10 +845,10 @@ export default function App() {
         <div className="space-y-6">
           {experiencesData.map((exp) => (
             <div key={exp.id} className={`bg-white/[0.0125] border border-white/10 rounded-2xl p-6 md:p-8 transition-all duration-500 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:bg-white/[0.025] ${accentGlow === "emerald"
-                ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
-                : accentGlow === "blue"
-                  ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
-                  : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
+              ? "hover:shadow-emerald-500/5 hover:border-emerald-500/30"
+              : accentGlow === "blue"
+                ? "hover:shadow-blue-500/5 hover:border-blue-500/30"
+                : "hover:shadow-yellow-500/5 hover:border-yellow-500/30"
               }`}>
               <div className={`absolute top-6 right-6 text-[10px] font-mono tracking-widest ${glowConfig[accentGlow].text} uppercase font-semibold`}>
                 {exp.period}
@@ -882,10 +889,10 @@ export default function App() {
       <section id="twin-assistant" className="w-full max-w-7xl mx-auto px-6 py-12 relative z-10 scroll-mt-24">
 
         <div className={`bg-[#090909] border border-white/15 rounded-3xl overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] relative transition-all duration-500 hover:border-white/25 hover:shadow-[0_40px_80px_rgba(0,0,0,0.95)] ${accentGlow === "emerald"
-            ? "hover:shadow-emerald-500/[0.015]"
-            : accentGlow === "blue"
-              ? "hover:shadow-blue-500/[0.015]"
-              : "hover:shadow-yellow-500/[0.015]"
+          ? "hover:shadow-emerald-500/[0.015]"
+          : accentGlow === "blue"
+            ? "hover:shadow-blue-500/[0.015]"
+            : "hover:shadow-yellow-500/[0.015]"
           }`}>
 
           {/* Internal Top Terminal Strip */}
@@ -952,8 +959,8 @@ export default function App() {
                     className={`flex flex-col max-w-[85%] ${msg.role === "user" ? "ml-auto items-end" : "mr-auto items-start"}`}
                   >
                     <div className={`px-4 py-3 rounded-2xl text-sm leading-relaxed ${msg.role === "user"
-                        ? "bg-white text-black font-medium rounded-tr-none"
-                        : "bg-white/5 border border-white/10 text-white/95 rounded-tl-none font-sans"
+                      ? "bg-white text-black font-medium rounded-tr-none"
+                      : "bg-white/5 border border-white/10 text-white/95 rounded-tl-none font-sans"
                       }`}>
                       {msg.role === "user" ? (
                         msg.content

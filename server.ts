@@ -12,7 +12,6 @@ async function startServer() {
 
   app.use(express.json());
 
-  // Initialize Gemini with server-side API Key
   const apiKey = process.env.GEMINI_API_KEY;
   console.log("GEMINI_API_KEY present:", !!apiKey);
   const ai = new GoogleGenAI({
