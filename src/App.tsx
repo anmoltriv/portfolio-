@@ -673,15 +673,15 @@ export default function App() {
 
               {/* Rich Social link badges */}
               <div className="flex flex-wrap gap-2.5 mt-4">
-                <a href="https://github.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="GitHub Profile">
+                <a href="https://github.com/anmoltriv" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="GitHub Profile">
                   <Github className="w-3.5 h-3.5" />
                   <span className="font-mono text-[10px]">GitHub</span>
                 </a>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="LinkedIn Profile">
+                <a href="https://www.linkedin.com/in/anmol-trivedi-op/" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="LinkedIn Profile">
                   <Linkedin className="w-3.5 h-3.5 text-blue-400" />
                   <span className="font-mono text-[10px]">LinkedIn</span>
                 </a>
-                <a href="https://leetcode.com" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="LeetCode Profile">
+                <a href="https://leetcode.com/u/anmolop/" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="LeetCode Profile">
                   <Code className="w-3.5 h-3.5 text-yellow-500" />
                   <span className="font-mono text-[10px]">LeetCode</span>
                 </a>
