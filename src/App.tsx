@@ -681,9 +681,9 @@ export default function App() {
                   <Linkedin className="w-3.5 h-3.5 text-blue-400" />
                   <span className="font-mono text-[10px]">LinkedIn</span>
                 </a>
-                <a href="https://leetcode.com/u/anmolop/" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="LeetCode Profile">
+                <a href="https://codolio.com/profile/anmolop" target="_blank" rel="noreferrer" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 flex items-center gap-1 text-xs text-white/70 hover:text-white hover:bg-white/10 hover:border-white/20 transition duration-200" title="LeetCode Profile">
                   <Code className="w-3.5 h-3.5 text-yellow-500" />
-                  <span className="font-mono text-[10px]">LeetCode</span>
+                  <span className="font-mono text-[10px]">Codolio</span>
                 </a>
               </div>
             </div>
