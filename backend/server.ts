@@ -2,21 +2,24 @@ import express from "express";
 import cors from "cors";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+dotenv.config();
 import path from "path";
+import { connectDB, pgClient } from "./db";
 
 // Import profile from repo root
 import { ANMOL_PROFILE } from "./profile";
+import { connect } from "http2";
 
-dotenv.config();
 
 async function startServer() {
   const app = express();
   const PORT = Number(process.env.PORT) || 3001;
 
   app.use(express.json());
-  // Allow cross-origin requests from the frontend (set CORS_ORIGIN to narrow down in production)
+
   app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
   app.options("*", cors());
+  await connectDB();
 
   const apiKey = process.env.GEMINI_API_KEY;
   console.log("GEMINI_API_KEY present:", !!apiKey);
@@ -73,7 +76,7 @@ If information is not present in the provided profile context, explicitly say:
       }));
 
       const lastMessage = messages[messages.length - 1];
-      const prompt = lastMessage.content;
+      const prompt = String(lastMessage.content);
 
       const chat = ai.chats.create({
         model: "gemini-2.5-flash",
@@ -85,11 +88,24 @@ If information is not present in the provided profile context, explicitly say:
       });
 
       const response = await chat.sendMessage({ message: prompt });
+      try {
+        await pgClient.query(
+          `
+  INSERT INTO portfolio (user_prompt, ai_response)
+  VALUES ($1, $2)
+  `,
+          [prompt, response.text],
+        );
+      } catch (err) {
+        console.error("Error in db query ", err);
+      }
 
       return res.json({ message: response.text });
     } catch (error: any) {
       console.error("Gemini API Error:", error);
-      return res.status(500).json({ error: error.message || "Failed to generate response." });
+      return res
+        .status(500)
+        .json({ error: error.message || "Failed to generate response." });
     }
   });
 

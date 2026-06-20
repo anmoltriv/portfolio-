@@ -9,12 +9,14 @@
     "dev": "tsx server.ts"
   },
   "dependencies": {
-  "@google/genai": "^2.4.0",
-  "cors": "^2.8.5",
-  "dotenv": "^17.2.3",
-  "express": "^4.21.2"
+    "@google/genai": "^2.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "pg": "^8.22.0"
   },
   "devDependencies": {
+    "@types/pg": "^8.20.0",
     "esbuild": "^0.25.0",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2"
