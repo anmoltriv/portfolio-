@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useAccent } from "../theme/AccentContext";
 
 // Unified skills array with custom brand-color configurations and inline SVG logos
 const updatedSkillsData = [
@@ -225,12 +226,9 @@ const updatedSkillsData = [
   }
 ];
 
-interface SkillsSectionProps {
-  glowConfig: any;
-  accentGlow: "blue" | "emerald" | "amber";
-}
+export default function SkillsSection() {
+  const { tokens } = useAccent();
 
-export default function SkillsSection({ glowConfig, accentGlow }: SkillsSectionProps) {
   return (
     <motion.section
       id="skills"
@@ -243,7 +241,7 @@ export default function SkillsSection({ glowConfig, accentGlow }: SkillsSectionP
       {/* Header Section */}
       <div className="flex flex-col items-center justify-center text-center mb-16">
         <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase select-none">
-          The Magic <span className={`italic font-serif normal-case tracking-normal ${glowConfig[accentGlow].text} drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-colors duration-300`}>Behind</span>
+          The Magic <span className={`italic font-serif normal-case tracking-normal ${tokens.text} drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-colors duration-300`}>Behind</span>
         </h2>
       </div>
 
