@@ -26,9 +26,3 @@ export interface ChatMessage {
   content: string;
   timestamp: string;
 }
-
-export interface Skill {
-  name: string;
-  category: 'frontend' | 'backend' | 'design_tools';
-  percentage: number;
-}

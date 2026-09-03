@@ -1,4 +1,4 @@
-import { Project, Experience, Skill } from "./types";
+import type { Project, Experience } from "./types";
 
 export const projectsData: Project[] = [
   {
@@ -49,24 +49,4 @@ export const experiencesData: Experience[] = [
       "Competitive Programming: Solved 500+ data structures and algorithms (DSA) problems and participated in 15+ contests across LeetCode, GeeksforGeeks, and Codeforces to maintain a highly competitive rank."
     ]
   }
-];
-
-export const skillsData: Skill[] = [
-  // Category 1: Core Programming & Scripting
-  { name: "C++ Programming", category: "frontend", percentage: 95 },
-  { name: "Python Scripting", category: "frontend", percentage: 88 },
-  { name: "C Programming", category: "frontend", percentage: 82 },
-  { name: "JavaScript / ES6+", category: "frontend", percentage: 90 },
-  // Category 2: Web & Full-Stack Development
-  { name: "React.js / Node.js", category: "backend", percentage: 93 },
-  { name: "Express.js & MongoDB", category: "backend", percentage: 89 },
-  { name: "Redux Toolkit & State", category: "backend", percentage: 90 },
-  { name: "Tailwind CSS & HTML5/CSS3", category: "backend", percentage: 95 },
-  { name: "Serverless PostgreSQL", category: "backend", percentage: 86 },
-  // Category 3: Data Science, Design & Ops
-  { name: "Scikit-learn / NLP", category: "design_tools", percentage: 80 },
-  { name: "Pandas & NumPy & Seaborn", category: "design_tools", percentage: 87 },
-  { name: "Git & GitHub Versioning", category: "design_tools", percentage: 90 },
-  { name: "Figma (UI Design)", category: "design_tools", percentage: 85 },
-  { name: "VS Code / PyCharm", category: "design_tools", percentage: 92 }
 ];
