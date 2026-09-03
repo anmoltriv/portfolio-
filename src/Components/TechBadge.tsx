@@ -110,6 +110,40 @@ const BRANDS: BrandEntry[] = [
         <path d="M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0" />
       </svg>
     )
+  },
+  {
+    keywords: ["typescript"],
+    color: "#3178C6",
+    icon: (
+      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="2" width="20" height="20" rx="3" fill="currentColor" />
+        <text x="12" y="16.5" textAnchor="middle" fontSize="10" fontWeight="bold" fontFamily="monospace" fill="#0a0a0a">
+          TS
+        </text>
+      </svg>
+    )
+  },
+  {
+    keywords: ["websocket", "socket"],
+    color: "#22D3EE",
+    icon: (
+      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m16 3 4 4-4 4" />
+        <path d="M20 7H4" />
+        <path d="m8 21-4-4 4-4" />
+        <path d="M4 17h16" />
+      </svg>
+    )
+  },
+  {
+    keywords: ["jwt"],
+    color: "#FB015B",
+    icon: (
+      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z" />
+        <circle cx="16.5" cy="7.5" r=".5" fill="currentColor" />
+      </svg>
+    )
   }
 ];
 
