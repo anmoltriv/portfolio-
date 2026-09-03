@@ -8,7 +8,7 @@ const STARTER_QUESTIONS = [
   "What is your tech stack?",
   "Tell me about NIT Rourkela",
   "Are you available for work and internships?",
-  "Tell me about ShopSphere"
+  "Tell me about Talkative"
 ];
 
 const BIO_FACTS = [

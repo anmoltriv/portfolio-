@@ -1,26 +1,45 @@
 import type { Project, Experience } from "./types";
+import contentAiShot from "./assets/images/content-ai.webp";
+import talkativeShot from "./assets/images/talkative.webp";
 
 export const projectsData: Project[] = [
+  {
+    id: "talkative",
+    title: "Talkative",
+    tagline: "Real-Time WebSocket Chat Platform",
+    description: "Engineered a room-based realtime chat backend on raw WebSockets with JWT handshake auth, replacing polling with persist-then-broadcast delivery.",
+    detailedDescription: "A real-time chat application built on a raw WebSocket transport rather than a managed realtime service, so every part of the connection lifecycle — upgrade, authentication, room membership and fan-out — is handled explicitly in the backend.",
+    highlights: [
+      "Engineered a WebSocket RTC backend on HTTP upgrade with JWT handshake auth, fanning out send/edit/delete events to room members instead of all connected clients.",
+      "Built a socket registry mapping connections to users and rooms, removing join/leave race conditions and improving live-state accuracy by 30% across multi-device sessions.",
+      "Replaced chat polling with persist-then-broadcast over WebSockets, cutting redundant REST traffic by ~90% and collapsing inbox last-message lookups into a single query."
+    ],
+    image: talkativeShot,
+    tags: ["Node.js", "Express.js", "TypeScript", "WebSocket (ws)", "PostgreSQL", "JWT"],
+    metrics: { label: "REST Traffic Cut", value: "~90%" },
+    demoLink: "https://for-talkatives.vercel.app/",
+    repos: [
+      { label: "Backend", url: "https://github.com/anmoltriv/chat-app-backend" },
+      { label: "Frontend", url: "https://github.com/anmoltriv/chat-app-frontend" }
+    ],
+    featured: true
+  },
   {
     id: "contentai",
     title: "Content.ai",
     tagline: "Full-Stack AI Content SaaS Engine",
     description: "Built a smart article writing and text-to-image pipeline integrating Gemini API and FLUX models with Clerk, serverless PostgreSQL, and optimized asset delivery.",
-    detailedDescription: "Built a full-stack SaaS content engine using Gemini API and the open-source FLUX model to automate long-form article writing and high-fidelity text-to-image synthesis pipelines. Integrated Clerk Auth via an asynchronous webhook architecture, maintaining sub-120ms dashboard synchronization latency across multi-tier billing-enabled user profiles. Optimized serverless PostgreSQL schemas via Neon DB connection pooling, handling complex concurrent dashboard data requests with consistent sub-100ms database latency. Designed an asynchronous asset processing pipeline utilizing Cloudinary API for on-the-fly image optimization and transformation, cutting overall client-side asset load times by 35%.",
+    detailedDescription: "A full-stack SaaS content engine using the Gemini API and the open-source FLUX model to automate long-form article writing and high-fidelity text-to-image synthesis pipelines.",
+    highlights: [
+      "Integrated Clerk Auth via an asynchronous webhook architecture, maintaining sub-120ms dashboard synchronization latency across multi-tier billing-enabled user profiles.",
+      "Optimized serverless PostgreSQL schemas via Neon DB connection pooling, handling complex concurrent dashboard data requests with consistent sub-100ms database latency.",
+      "Designed an asynchronous asset processing pipeline utilizing the Cloudinary API for on-the-fly image optimization and transformation, cutting overall client-side asset load times by 35%."
+    ],
+    image: contentAiShot,
     tags: ["React.js", "Node.js", "Express.js", "Neon DB (PostgreSQL)", "ClerkAuth", "Cloudinary", "Gemini API", "Tailwind CSS"],
     metrics: { label: "Asset Load Cut", value: "35%" },
-    githubLink: "https://github.com/anmoltriv/ContentAI",
-    featured: true
-  },
-  {
-    id: "shopsphere",
-    title: "ShopSphere",
-    tagline: "Full-Stack Marketplace Platform",
-    description: "Engineered scalable e-commerce architecture with Redux central state, secure JWT Role-Based Access Control, and robust Mongoose transactional layer.",
-    detailedDescription: "Engineered a scalable MERN-stack production architecture supporting 100+ concurrent products with secure JWT-based authentication and Role-Based Access Control (RBAC). Developed a centralized global state management system using Redux Toolkit, optimizing frontend data flow and reducing redundant API calls by 30% to maximize load speeds. Integrated a robust MongoDB relational mapping layer via Mongoose, validating complex transactional schemas, deep order histories, and responsive Tailwind CSS layout rendering.",
-    tags: ["MongoDB", "Express.js", "React.js", "Node.js", "Redux Toolkit", "Tailwind CSS"],
-    metrics: { label: "Redundant Calls Cut", value: "30%" },
-    githubLink: "https://github.com",
+    demoLink: "https://content-ai-kohl.vercel.app/",
+    repos: [],
     featured: true
   }
 ];

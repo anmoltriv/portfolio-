@@ -11,18 +11,28 @@ export const ANMOL_PROFILE = {
 
   skills: {
     frontend: ["React", "Redux Toolkit", "Tailwind CSS"],
-    backend: ["Node.js", "Express.js", "MongoDB", "PostgreSQL"],
+    backend: ["Node.js", "Express.js", "TypeScript", "WebSocket (ws)", "PostgreSQL", "MongoDB"],
     languages: ["C++", "JavaScript", "Python", "C"]
   },
 
   projects: [
     {
-      name: "Content.ai",
-      summary: "AI SaaS platform using Gemini API, FLUX, Clerk, NeonDB and Cloudinary."
+      name: "Talkative",
+      summary:
+        "Real-time room-based chat platform on a raw WebSocket transport. JWT handshake auth on HTTP upgrade, a socket registry mapping connections to users and rooms, and persist-then-broadcast delivery that replaced polling and cut redundant REST traffic by around 90%.",
+      stack: ["Node.js", "Express.js", "TypeScript", "WebSocket (ws)", "PostgreSQL", "JWT"],
+      live: "https://for-talkatives.vercel.app/",
+      repos: {
+        backend: "https://github.com/anmoltriv/chat-app-backend",
+        frontend: "https://github.com/anmoltriv/chat-app-frontend"
+      }
     },
     {
-      name: "ShopSphere",
-      summary: "MERN marketplace with JWT authentication and Redux Toolkit."
+      name: "Content.ai",
+      summary:
+        "AI SaaS content engine using the Gemini API and the FLUX model for article writing and text-to-image generation, with Clerk webhook auth, Neon serverless PostgreSQL and a Cloudinary asset pipeline that cut client-side asset load times by 35%.",
+      stack: ["React.js", "Node.js", "Express.js", "Neon DB (PostgreSQL)", "ClerkAuth", "Cloudinary", "Gemini API"],
+      live: "https://content-ai-kohl.vercel.app/"
     }
   ]
 };
