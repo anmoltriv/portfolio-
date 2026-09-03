@@ -13,55 +13,34 @@ html {
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.25;
   }
   50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-text-gradient {
-  background: linear-gradient(135deg, #FF007A 0%, #E033A0 30%, #FF7A00 70%, #FF007A 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent !important;
-  animation: gradient-shift 5s ease infinite;
-}
-
-.animate-glow-pulse {
-  animation: bg-glow-shift 12s ease infinite alternate;
-}
-
-@keyframes bg-glow-shift {
-  0% {
-    transform: translate(0px, 0px) scale(1) rotate(0deg);
-  }
-  50% {
-    transform: translate(40px, -30px) scale(1.1) rotate(180deg);
-  }
-  100% {
-    transform: translate(-30px, 20px) scale(0.9) rotate(360deg);
+    opacity: 0.6;
   }
 }
 
 @layer utilities {
-  /* Glowing ambient effect classes */
-  .glow-border {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(10, 10, 10, 0.4);
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(12px);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Ambient halo behind the profile portrait. */
+  .animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
-  .glow-border:hover {
-    border-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 0 50px rgba(255, 255, 255, 0.04);
-    transform: translateY(-2px);
+
+  /* Narrow dark scrollbar for the chat transcript. */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-zinc-800) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    width: 6px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background-color: var(--color-zinc-800);
+    border-radius: 9999px;
   }
 }
