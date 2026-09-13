@@ -3,6 +3,13 @@ import { ArrowUpRight, Send, Zap } from "lucide-react";
 import Markdown from "react-markdown";
 import { useAccent } from "../theme/AccentContext";
 import { useChat } from "../chat/ChatContext";
+import type { BackendStatus } from "../chat/ChatContext";
+
+const STATUS_LABEL: Record<BackendStatus, string> = {
+  warming: "WAKING SERVER • ONE MOMENT",
+  ready: "ONLINE • READY TO CHAT",
+  unreachable: "OFFLINE • SERVING CACHED BIO"
+};
 
 const STARTER_QUESTIONS = [
   "What is your tech stack?",
@@ -19,8 +26,13 @@ const BIO_FACTS = [
 
 export default function ChatSection() {
   const { tokens } = useAccent();
-  const { messages, input, setInput, isLoading, send } = useChat();
+  const { messages, input, setInput, isLoading, backendStatus, send } = useChat();
   const endRef = useRef<HTMLDivElement>(null);
+
+  const isAsleep = backendStatus === "warming";
+  const isOffline = backendStatus === "unreachable";
+  const statusDot = isAsleep ? "bg-amber-400" : isOffline ? "bg-zinc-600" : tokens.bg;
+  const statusText = isAsleep ? "text-amber-300" : isOffline ? "text-white/40" : tokens.text;
 
   // Skip the first run (the welcome message on mount) so the page doesn't jump
   // down to the chat panel on load or refresh.
@@ -44,12 +56,20 @@ export default function ChatSection() {
         {/* Internal Top Terminal Strip */}
         <div className="bg-white/[0.02] border-b border-white/10 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
-            <div className={`w-3.5 h-3.5 rounded-full animate-pulse relative ${tokens.bg}`}>
-              <span className={`absolute inset-0 animate-ping rounded-full opacity-60 ${tokens.ping}`} />
+            <div
+              className={`w-3.5 h-3.5 rounded-full relative ${statusDot} ${isOffline ? "" : "animate-pulse"}`}
+            >
+              {!isOffline && (
+                <span
+                  className={`absolute inset-0 animate-ping rounded-full opacity-60 ${isAsleep ? "bg-amber-400" : tokens.ping}`}
+                />
+              )}
             </div>
             <div>
               <h3 className="text-base font-extrabold tracking-tight">Anmol&apos;s AI Digital Twin</h3>
-              <p className={`text-[10px] font-mono ${tokens.text}`}>ONLINE • READY TO CHAT</p>
+              <p className={`text-[10px] font-mono ${statusText}`} aria-live="polite">
+                {STATUS_LABEL[backendStatus]}
+              </p>
             </div>
           </div>
 
@@ -133,7 +153,7 @@ export default function ChatSection() {
                 <div className="flex flex-col max-w-[85%] mr-auto items-start">
                   <div className="px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-white/40 rounded-tl-none font-mono text-xs flex items-center gap-2">
                     <Zap className={`w-3.5 h-3.5 animate-bounce ${tokens.text}`} />
-                    <span>Thinking...</span>
+                    <span>{isAsleep ? "Waking the server, this can take a moment..." : "Thinking..."}</span>
                   </div>
                 </div>
               )}

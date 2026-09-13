@@ -1,4 +1,12 @@
-import { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import type { ReactNode } from "react";
 import type { ChatMessage } from "../types";
 import { API_BASE_URL } from "../config";
@@ -22,11 +30,59 @@ function createId(): string {
   return Math.random().toString(36).substring(7);
 }
 
+/** A cold container answers slowly; a booting one can 502 for a few seconds. */
+const WARMUP_TIMEOUT_MS = 60_000;
+const WARMUP_ATTEMPTS = 3;
+const WARMUP_RETRY_DELAY_MS = 4_000;
+
+async function pingHealth(): Promise<boolean> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), WARMUP_TIMEOUT_MS);
+  try {
+    const res = await fetch(`${API_BASE_URL}/health`, { cache: "no-store", signal: controller.signal });
+    return res.ok;
+  } catch {
+    return false;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * The backend sleeps on its host's free tier and takes up to a minute to boot,
+ * so whoever sends the first message pays that wait. Pinging on page load moves
+ * the boot into the time a visitor spends scrolling down to the chat instead.
+ * Deduped at module scope so a remount can't fire a second round of pings.
+ */
+let warmup: Promise<boolean> | null = null;
+
+function warmBackend(): Promise<boolean> {
+  if (warmup) return warmup;
+
+  warmup = (async () => {
+    if (!API_BASE_URL) return false;
+
+    for (let attempt = 1; attempt <= WARMUP_ATTEMPTS; attempt += 1) {
+      if (await pingHealth()) return true;
+      if (attempt < WARMUP_ATTEMPTS) {
+        await new Promise((resolve) => setTimeout(resolve, WARMUP_RETRY_DELAY_MS));
+      }
+    }
+    return false;
+  })();
+
+  return warmup;
+}
+
+export type BackendStatus = "warming" | "ready" | "unreachable";
+
 interface ChatContextValue {
   messages: ChatMessage[];
   input: string;
   setInput: (value: string) => void;
   isLoading: boolean;
+  /** Whether the backend has answered yet, so the UI can stop claiming it's up. */
+  backendStatus: BackendStatus;
   /** Sends `text` if given, otherwise sends and clears the current input. */
   send: (text?: string) => void;
 }
@@ -37,6 +93,21 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [messages, setMessages] = useState<ChatMessage[]>([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [backendStatus, setBackendStatus] = useState<BackendStatus>("warming");
+
+  useEffect(() => {
+    let active = true;
+    warmBackend().then((ok) => {
+      // A real message may have already proven the backend's state by now, and
+      // that answer beats a stale ping result.
+      if (active) {
+        setBackendStatus((prev) => (prev === "warming" ? (ok ? "ready" : "unreachable") : prev));
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // Read inside the callback so `send` stays referentially stable and doesn't
   // invalidate every consumer on each keystroke or new message.
@@ -86,6 +157,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       }
 
       const data = await res.json();
+      setBackendStatus("ready");
       setMessages((prev) => [
         ...prev,
         {
@@ -99,6 +171,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       ]);
     } catch (err) {
       console.error(err);
+      setBackendStatus("unreachable");
       setMessages((prev) => [
         ...prev,
         {
@@ -114,8 +187,8 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const value = useMemo(
-    () => ({ messages, input, setInput, isLoading, send }),
-    [messages, input, isLoading, send]
+    () => ({ messages, input, setInput, isLoading, backendStatus, send }),
+    [messages, input, isLoading, backendStatus, send]
   );
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
