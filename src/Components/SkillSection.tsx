@@ -256,10 +256,11 @@ export default function SkillsSection() {
             transition={{ duration: 0.4, delay: index * 0.015 }}
             whileHover={{
               y: -4,
-              scale: 1.04,
+              scale: 1.05,
               borderColor: `${skill.hex}50`,
               boxShadow: `0 8px 25px ${skill.hex}25, inset 0 0 10px ${skill.hex}15`,
-              backgroundColor: "rgba(0, 0, 0, 0.85)"
+              backgroundColor: "rgba(0, 0, 0, 0.85)",
+              transition: { type: "spring", stiffness: 380, damping: 22 }
             }}
             className="flex items-center gap-2.5 px-4 py-2.5 bg-[#0b0b0b]/65 backdrop-blur-md border rounded-full text-white/80 cursor-default select-none transition-colors duration-300 ease-out hover:text-white"
             style={{

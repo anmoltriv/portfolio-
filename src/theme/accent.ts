@@ -26,6 +26,9 @@ export interface AccentTokens {
   panelHover: string;
   photoGlow: string;
   orbs: [string, string, string];
+  /** Raw color used for CSS variables, canvas confetti, and spotlight glows. */
+  hex: string;
+  rgb: string;
 }
 
 export const ACCENTS: Record<AccentName, AccentTokens> = {
@@ -49,7 +52,9 @@ export const ACCENTS: Record<AccentName, AccentTokens> = {
       "hover:shadow-emerald-500/5 hover:border-emerald-500/30 hover:bg-emerald-950/15",
     panelHover: "hover:shadow-emerald-500/[0.015]",
     photoGlow: "bg-emerald-500/20 shadow-[0_0_20px_#10b981]",
-    orbs: ["bg-emerald-950/25", "bg-teal-950/20", "bg-[#0b1210]/20"]
+    orbs: ["bg-emerald-950/25", "bg-teal-950/20", "bg-[#0b1210]/20"],
+    hex: "#34d399",
+    rgb: "52, 211, 153"
   },
   blue: {
     text: "text-blue-400",
@@ -71,7 +76,9 @@ export const ACCENTS: Record<AccentName, AccentTokens> = {
       "hover:shadow-blue-500/5 hover:border-blue-500/30 hover:bg-blue-950/15",
     panelHover: "hover:shadow-blue-500/[0.015]",
     photoGlow: "bg-blue-500/20 shadow-[0_0_20px_#3b82f6]",
-    orbs: ["bg-blue-950/25", "bg-indigo-950/20", "bg-[#091122]/20"]
+    orbs: ["bg-blue-950/25", "bg-indigo-950/20", "bg-[#091122]/20"],
+    hex: "#60a5fa",
+    rgb: "96, 165, 250"
   },
   amber: {
     text: "text-yellow-400",
@@ -93,7 +100,9 @@ export const ACCENTS: Record<AccentName, AccentTokens> = {
       "hover:shadow-yellow-500/5 hover:border-yellow-500/30 hover:bg-yellow-950/15",
     panelHover: "hover:shadow-yellow-500/[0.015]",
     photoGlow: "bg-yellow-500/20 shadow-[0_0_20px_#f59e0b]",
-    orbs: ["bg-amber-950/25", "bg-yellow-950/15", "bg-[#1c1208]/20"]
+    orbs: ["bg-amber-950/25", "bg-yellow-950/15", "bg-[#1c1208]/20"],
+    hex: "#facc15",
+    rgb: "250, 204, 21"
   }
 };
 

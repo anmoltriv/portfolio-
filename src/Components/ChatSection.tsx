@@ -174,7 +174,7 @@ export default function ChatSection() {
                 placeholder="Ask me something..."
                 disabled={isLoading}
                 aria-label="Ask Anmol's AI twin a question"
-                className={`flex-1 bg-white/[0.03] border border-white/10 hover:border-white/20 focus:outline-none px-5 py-3 rounded-xl text-sm transition font-sans ${tokens.focusBorder}`}
+                className="glow-input flex-1 bg-white/[0.03] border border-white/10 hover:border-white/20 focus:outline-none px-5 py-3 rounded-xl text-sm transition font-sans"
               />
               <button
                 type="submit"

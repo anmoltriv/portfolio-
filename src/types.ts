@@ -18,6 +18,8 @@ export interface Project {
   demoLink?: string;
   repos: ProjectLink[];
   featured: boolean;
+  /** Gradient wash around the project card, unique per piece. */
+  wash: string;
 }
 
 export interface Experience {

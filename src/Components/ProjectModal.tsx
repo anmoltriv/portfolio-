@@ -1,7 +1,10 @@
 import { ExternalLink, Github, MessageSquare, X } from "lucide-react";
+import { useEffect } from "react";
+import { motion } from "motion/react";
 import type { Project } from "../types";
 import { useAccent } from "../theme/AccentContext";
 import { useChat } from "../chat/ChatContext";
+import { springSnappy } from "../lib/motion";
 
 interface ProjectModalProps {
   project: Project;
@@ -12,9 +15,30 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
   const { tokens } = useAccent();
   const { send } = useChat();
 
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-xl z-50 flex items-center justify-center p-4">
-      <div className="bg-[#0b0b0b] border border-white/15 max-w-2xl w-full rounded-2xl relative max-h-[90vh] overflow-y-auto shadow-2xl scrollbar-slim">
+    <motion.div
+      className="fixed inset-0 bg-black/80 backdrop-blur-xl z-[100] flex items-center justify-center p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="bg-[#0b0b0b] border border-white/15 max-w-2xl w-full rounded-2xl relative max-h-[90vh] overflow-y-auto shadow-2xl scrollbar-slim"
+        initial={{ opacity: 0, scale: 0.96, y: 16 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.98, y: 8 }}
+        transition={springSnappy}
+        onClick={(event) => event.stopPropagation()}
+      >
         <button
           onClick={onClose}
           aria-label="Close project details"
@@ -119,7 +143,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
