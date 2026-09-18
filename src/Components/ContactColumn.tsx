@@ -18,7 +18,11 @@ export default function ContactColumn() {
   useEffect(() => () => clearTimeout(resetTimer.current), []);
 
   const copyEmail = async () => {
-    await navigator.clipboard.writeText(SITE.email);
+    try {
+      await navigator.clipboard.writeText(SITE.email);
+    } catch {
+      // Clipboard can be blocked in some browsers; still celebrate the attempt.
+    }
     setCopied(true);
     const rect = buttonRef.current?.getBoundingClientRect();
     burst(

@@ -42,15 +42,14 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <h1 className="flex justify-center text-[18vw] sm:text-[14vw] md:text-[9.5rem] font-black leading-[0.78] tracking-tighter uppercase mb-8 text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 cursor-default">
+        <h1 className="flex justify-center text-[20vw] sm:text-[15vw] md:text-[10.5rem] font-black leading-[0.78] tracking-tighter uppercase mb-8 text-white cursor-default">
           {LETTERS.map((letter, index) => (
             <motion.span
               key={`${letter}-${index}`}
-              initial={reduced ? false : { y: 90, opacity: 0, rotateX: 50 }}
-              animate={{ y: 0, opacity: 1, rotateX: 0 }}
-              transition={{ ...springGentle, delay: 0.06 * index }}
-              className="inline-block origin-bottom hover:tracking-[0.08em] transition-[letter-spacing] duration-700"
-              style={{ transformPerspective: 600 }}
+              initial={reduced ? false : { y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ ...springGentle, delay: 0.07 * index }}
+              className="inline-block origin-bottom"
             >
               {letter}
             </motion.span>

@@ -27,19 +27,19 @@ interface Particle {
 }
 
 function spawnParticles(origin: Origin, accent: string): Particle[] {
-  const colors = [accent, "#ffffff", "#f5d76e", "#e5e5e5", "#fb7185"];
-  return Array.from({ length: 42 }, () => {
+  const colors = [accent, "#ffffff", "#f5d76e", "#e5e5e5", "#fb7185", "#34d399"];
+  return Array.from({ length: 64 }, () => {
     const angle = Math.random() * Math.PI * 2;
-    const speed = 3 + Math.random() * 7;
+    const speed = 4 + Math.random() * 9;
     return {
       x: origin.x,
       y: origin.y,
       vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed - 4,
-      size: 3 + Math.random() * 5,
+      vy: Math.sin(angle) * speed - 6,
+      size: 4 + Math.random() * 7,
       color: colors[Math.floor(Math.random() * colors.length)],
       life: 1,
-      decay: 0.012 + Math.random() * 0.016,
+      decay: 0.01 + Math.random() * 0.012,
       tilt: Math.random() * Math.PI,
       spin: (Math.random() - 0.5) * 0.4
     };

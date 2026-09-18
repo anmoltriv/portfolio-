@@ -72,7 +72,11 @@ export default function CommandPalette() {
         group: "Actions",
         icon: Copy,
         run: async () => {
-          await navigator.clipboard.writeText(SITE.email);
+          try {
+            await navigator.clipboard.writeText(SITE.email);
+          } catch {
+            /* clipboard may be blocked */
+          }
           burst({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
           setOpen(false);
         }
