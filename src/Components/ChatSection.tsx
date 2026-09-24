@@ -27,7 +27,7 @@ const BIO_FACTS = [
 export default function ChatSection() {
   const { tokens } = useAccent();
   const { messages, input, setInput, isLoading, backendStatus, send } = useChat();
-  const endRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   const isAsleep = backendStatus === "warming";
   const isOffline = backendStatus === "unreachable";
@@ -42,7 +42,11 @@ export default function ChatSection() {
       hasMounted.current = true;
       return;
     }
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll the transcript itself. scrollIntoView on a trailing marker walks
+    // every scrollable ancestor, so it dragged the whole window down to the
+    // footer each time a message was sent.
+    const list = listRef.current;
+    list?.scrollTo({ top: list.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -122,7 +126,7 @@ export default function ChatSection() {
           {/* Chat Conversation Console (Right columns) */}
           <div className="md:col-span-2 p-6 flex flex-col justify-between h-[450px]">
 
-            <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-slim">
+            <div ref={listRef} className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2 scrollbar-slim">
               {messages.map((message) => (
                 <div
                   key={message.id}
@@ -157,7 +161,6 @@ export default function ChatSection() {
                   </div>
                 </div>
               )}
-              <div ref={endRef} />
             </div>
 
             <form
