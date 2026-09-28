@@ -10,7 +10,7 @@ export interface GitCalendar {
 }
 
 /** ~two months of Sunday-start weeks, matching GitHub's contribution grid. */
-export const HEATMAP_WEEK_COUNT = 9;
+export const HEATMAP_WEEK_COUNT = 10;
 
 function pad(value: number): string {
   return String(value).padStart(2, "0");
@@ -18,6 +18,29 @@ function pad(value: number): string {
 
 export function formatISODate(date: Date): string {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+export function parseLocalDate(isoDate: string): Date {
+  const [year, month, day] = isoDate.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+/** GitHub omits days before `from` and after today; pad so every column is Sun–Sat. */
+export function padWeekToSundayGrid(week: ContributionDay[]): ContributionDay[] {
+  if (week.length === 0) return week;
+  if (week.length === 7 && parseLocalDate(week[0].date).getDay() === 0) return week;
+
+  const first = parseLocalDate(week[0].date);
+  const days: ContributionDay[] = [];
+  for (let offset = first.getDay(); offset > 0; offset -= 1) {
+    days.push({ date: formatISODate(addDays(first, -offset)), count: 0 });
+  }
+  days.push(...week);
+  while (days.length < 7) {
+    const last = parseLocalDate(days[days.length - 1].date);
+    days.push({ date: formatISODate(addDays(last, 1)), count: 0 });
+  }
+  return days.slice(0, 7);
 }
 
 function startOfWeekSunday(date: Date): Date {
@@ -49,8 +72,7 @@ export function buildEmptyWeeks(weekCount = HEATMAP_WEEK_COUNT): ContributionDay
 }
 
 export function monthLabel(isoDate: string): string {
-  const [year, month, day] = isoDate.split("-").map(Number);
-  return new Date(year, month - 1, day).toLocaleString("en-US", { month: "short" });
+  return parseLocalDate(isoDate).toLocaleString("en-US", { month: "short" });
 }
 
 /** GitHub-style 0–4 buckets, scaled to the busiest day in the window. */
@@ -74,17 +96,16 @@ export function parseCalendar(payload: unknown): GitCalendar | null {
   const weeks = data.weeks
     .map((week) =>
       Array.isArray(week)
-        ? week
-            .filter(
-              (day): day is ContributionDay =>
-                !!day &&
-                typeof day === "object" &&
-                typeof day.date === "string" &&
-                typeof day.count === "number"
-            )
-            .slice(0, 7)
+        ? week.filter(
+            (day): day is ContributionDay =>
+              !!day &&
+              typeof day === "object" &&
+              typeof day.date === "string" &&
+              typeof day.count === "number"
+          )
         : []
     )
+    .map(padWeekToSundayGrid)
     .filter((week) => week.length === 7);
 
   if (weeks.length === 0) return null;

@@ -169,15 +169,37 @@ If information is not present in the provided profile context, explicitly say:
       }
 
       const calendar = payload.data.user.contributionsCollection.contributionCalendar;
+      const weeks = calendar.weeks.map(
+        (week: { contributionDays: { date: string; contributionCount: number }[] }) => {
+          const days = week.contributionDays.map((day) => ({
+            date: day.date,
+            count: day.contributionCount
+          }));
+          if (days.length === 0) return days;
+
+          const first = new Date(`${days[0].date}T00:00:00`);
+          const iso = (date: Date) =>
+            `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+          const padded: { date: string; count: number }[] = [];
+          for (let offset = first.getDay(); offset > 0; offset -= 1) {
+            const prior = new Date(first);
+            prior.setDate(first.getDate() - offset);
+            padded.push({ date: iso(prior), count: 0 });
+          }
+          padded.push(...days);
+          while (padded.length < 7) {
+            const last = new Date(`${padded[padded.length - 1].date}T00:00:00`);
+            last.setDate(last.getDate() + 1);
+            padded.push({ date: iso(last), count: 0 });
+          }
+          return padded.slice(0, 7);
+        }
+      );
+
       const body = {
         username: GITHUB_USERNAME,
         total: calendar.totalContributions,
-        weeks: calendar.weeks.map((week: { contributionDays: { date: string; contributionCount: number }[] }) =>
-          week.contributionDays.map((day) => ({
-            date: day.date,
-            count: day.contributionCount
-          }))
-        )
+        weeks
       };
 
       contributionsCache = { expiresAt: Date.now() + CONTRIBUTIONS_CACHE_MS, body };
