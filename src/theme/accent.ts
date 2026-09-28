@@ -41,6 +41,8 @@ export interface AccentTokens {
   selection: string;
   /** Text sitting on the solid accent fill (send / enquire hover). */
   onSolid: string;
+  /** Five GitHub-style heatmap steps: empty → most active. */
+  heat: [string, string, string, string, string];
 }
 
 export const DARK_ACCENTS: Record<DarkAccentName, AccentTokens> = {
@@ -65,7 +67,8 @@ export const DARK_ACCENTS: Record<DarkAccentName, AccentTokens> = {
     photoGlow: "bg-emerald-500/20 shadow-[0_0_20px_#10b981]",
     orbs: ["bg-emerald-950/25", "bg-teal-950/20", "bg-[#0b1210]/20"],
     selection: "selection:bg-emerald-500/30 selection:text-emerald-400",
-    onSolid: "text-black"
+    onSolid: "text-black",
+    heat: ["bg-fg/[0.06]", "bg-emerald-950", "bg-emerald-800", "bg-emerald-500", "bg-emerald-300"]
   },
   blue: {
     text: "text-blue-400",
@@ -88,7 +91,8 @@ export const DARK_ACCENTS: Record<DarkAccentName, AccentTokens> = {
     photoGlow: "bg-blue-500/20 shadow-[0_0_20px_#3b82f6]",
     orbs: ["bg-blue-950/25", "bg-indigo-950/20", "bg-[#091122]/20"],
     selection: "selection:bg-blue-500/30 selection:text-blue-400",
-    onSolid: "text-black"
+    onSolid: "text-black",
+    heat: ["bg-fg/[0.06]", "bg-blue-950", "bg-blue-800", "bg-blue-500", "bg-blue-300"]
   },
   amber: {
     text: "text-yellow-400",
@@ -111,7 +115,8 @@ export const DARK_ACCENTS: Record<DarkAccentName, AccentTokens> = {
     photoGlow: "bg-yellow-500/20 shadow-[0_0_20px_#f59e0b]",
     orbs: ["bg-amber-950/25", "bg-yellow-950/15", "bg-[#1c1208]/20"],
     selection: "selection:bg-amber-500/30 selection:text-yellow-400",
-    onSolid: "text-black"
+    onSolid: "text-black",
+    heat: ["bg-fg/[0.06]", "bg-amber-950", "bg-yellow-800", "bg-yellow-500", "bg-yellow-300"]
   }
 };
 
@@ -141,7 +146,8 @@ export const LIGHT_ACCENTS: Record<LightAccentName, AccentTokens> = {
     photoGlow: "bg-teal-400/30 shadow-[0_0_28px_#2dd4bf]",
     orbs: ["bg-teal-200/65", "bg-emerald-100/50", "bg-stone-100/60"],
     selection: "selection:bg-teal-200 selection:text-teal-900",
-    onSolid: "text-white"
+    onSolid: "text-white",
+    heat: ["bg-fg/[0.08]", "bg-teal-100", "bg-teal-300", "bg-teal-500", "bg-teal-700"]
   },
   azure: {
     text: "text-sky-700",
@@ -164,7 +170,8 @@ export const LIGHT_ACCENTS: Record<LightAccentName, AccentTokens> = {
     photoGlow: "bg-sky-400/35 shadow-[0_0_28px_#38bdf8]",
     orbs: ["bg-sky-200/70", "bg-cyan-100/60", "bg-indigo-100/50"],
     selection: "selection:bg-sky-200 selection:text-sky-900",
-    onSolid: "text-white"
+    onSolid: "text-white",
+    heat: ["bg-fg/[0.08]", "bg-sky-100", "bg-sky-300", "bg-sky-500", "bg-sky-700"]
   },
   violet: {
     text: "text-violet-700",
@@ -187,7 +194,8 @@ export const LIGHT_ACCENTS: Record<LightAccentName, AccentTokens> = {
     photoGlow: "bg-violet-400/35 shadow-[0_0_28px_#a78bfa]",
     orbs: ["bg-violet-200/65", "bg-indigo-100/55", "bg-slate-100/50"],
     selection: "selection:bg-violet-200 selection:text-violet-900",
-    onSolid: "text-white"
+    onSolid: "text-white",
+    heat: ["bg-fg/[0.08]", "bg-violet-100", "bg-violet-300", "bg-violet-500", "bg-violet-700"]
   }
 };
 

@@ -17,7 +17,10 @@ async function startServer() {
   await connectDB();
 
   const apiKey = process.env.GEMINI_API_KEY;
+  const GITHUB_USERNAME = process.env.GITHUB_USERNAME || "anmoltriv";
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
   console.log("GEMINI_API_KEY present:", !!apiKey);
+  console.log("GITHUB_TOKEN present:", !!GITHUB_TOKEN);
 
   const ai = new GoogleGenAI({
     apiKey: apiKey || "",
@@ -100,6 +103,89 @@ If information is not present in the provided profile context, explicitly say:
       return res
         .status(500)
         .json({ error: error.message || "Failed to generate response." });
+    }
+  });
+
+  let contributionsCache: { expiresAt: number; body: unknown } | null = null;
+  const CONTRIBUTIONS_CACHE_MS = 5 * 60 * 1000;
+
+  const CONTRIBUTIONS_QUERY = `
+    query ($login: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $login) {
+        contributionsCollection(from: $from, to: $to) {
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                date
+                contributionCount
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  app.get("/api/github-contributions", async (_req, res) => {
+    if (!GITHUB_TOKEN) {
+      return res.status(503).json({
+        error: "GITHUB_TOKEN is not configured on the backend."
+      });
+    }
+
+    if (contributionsCache && contributionsCache.expiresAt > Date.now()) {
+      res.setHeader("Cache-Control", "public, max-age=60");
+      return res.json(contributionsCache.body);
+    }
+
+    try {
+      const to = new Date();
+      const from = new Date(to);
+      from.setUTCMonth(from.getUTCMonth() - 2);
+
+      const ghRes = await fetch("https://api.github.com/graphql", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+          "Content-Type": "application/json",
+          "User-Agent": "anmol-portfolio-heatmap",
+          Accept: "application/json"
+        },
+        body: JSON.stringify({
+          query: CONTRIBUTIONS_QUERY,
+          variables: {
+            login: GITHUB_USERNAME,
+            from: from.toISOString(),
+            to: to.toISOString()
+          }
+        })
+      });
+
+      const payload = await ghRes.json();
+      if (!ghRes.ok || payload.errors || !payload.data?.user) {
+        console.error("GitHub GraphQL error:", payload.errors || payload.message);
+        return res.status(502).json({ error: "Failed to load GitHub contributions." });
+      }
+
+      const calendar = payload.data.user.contributionsCollection.contributionCalendar;
+      const body = {
+        username: GITHUB_USERNAME,
+        total: calendar.totalContributions,
+        weeks: calendar.weeks.map((week: { contributionDays: { date: string; contributionCount: number }[] }) =>
+          week.contributionDays.map((day) => ({
+            date: day.date,
+            count: day.contributionCount
+          }))
+        )
+      };
+
+      contributionsCache = { expiresAt: Date.now() + CONTRIBUTIONS_CACHE_MS, body };
+      res.setHeader("Cache-Control", "public, max-age=60");
+      return res.json(body);
+    } catch (error) {
+      console.error("GitHub contributions fetch failed:", error);
+      return res.status(502).json({ error: "Failed to load GitHub contributions." });
     }
   });
 
