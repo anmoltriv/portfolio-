@@ -172,14 +172,14 @@ export default function TechBadge({ tag }: { tag: string }) {
   const brand = resolveBrand(tag);
 
   return (
-    <div className="group/badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 text-[10.5px] font-mono tracking-wide text-white/50 hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 cursor-default">
+    <div className="group/badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fg/[0.03] hover:bg-fg/[0.07] border border-fg/5 text-[10.5px] font-mono tracking-wide text-fg/50 hover:text-fg hover:scale-105 active:scale-95 transition-all duration-300 cursor-default">
       <span
         className="transition-all duration-500 filter grayscale opacity-60 group-hover/badge:grayscale-0 group-hover/badge:opacity-100"
         style={{ color: brand.color }}
       >
         {brand.icon}
       </span>
-      <span className="group-hover/badge:text-white transition-colors duration-300">{tag}</span>
+      <span className="group-hover/badge:text-fg transition-colors duration-300">{tag}</span>
     </div>
   );
 }

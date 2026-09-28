@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { useAccent } from "../theme/AccentContext";
+import { useTheme } from "../theme/ThemeContext";
 
 // Unified skills array with custom brand-color configurations and inline SVG logos
 const updatedSkillsData = [
@@ -19,7 +20,7 @@ const updatedSkillsData = [
     name: "NextJS",
     hex: "#FFFFFF",
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 shrink-0 bg-white/10 rounded-full p-0.5">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4 shrink-0 bg-fg/10 rounded-full p-0.5">
         <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.318 15.655l-4.14-5.341v5.127H11.02V8.373h1.151l4.08 5.275V8.373h1.168v9.282h-1.101z" fill="currentColor"/>
       </svg>
     )
@@ -62,7 +63,7 @@ const updatedSkillsData = [
     name: "ExpressJS",
     hex: "#828282",
     icon: (
-      <div className="w-4 h-4 bg-white/10 text-white font-mono font-bold text-[8px] flex items-center justify-center rounded-sm shrink-0 border border-white/5 select-none">EX</div>
+      <div className="w-4 h-4 bg-fg/10 text-fg font-mono font-bold text-[8px] flex items-center justify-center rounded-sm shrink-0 border border-fg/5 select-none">EX</div>
     )
   },
   {
@@ -145,7 +146,7 @@ const updatedSkillsData = [
     name: "GitHub",
     hex: "#FFFFFF",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0 text-white">
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0 text-fg">
         <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
       </svg>
     )
@@ -154,7 +155,7 @@ const updatedSkillsData = [
     name: "Vercel",
     hex: "#FFFFFF",
     icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0 text-white">
+      <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0 text-fg">
         <path d="M24 22.525H0L12 1.736l12 20.789Z" />
       </svg>
     )
@@ -228,6 +229,8 @@ const updatedSkillsData = [
 
 export default function SkillsSection() {
   const { tokens } = useAccent();
+  const { theme } = useTheme();
+  const chipHoverFill = theme === "light" ? "rgba(255, 252, 247, 0.95)" : "rgba(0, 0, 0, 0.85)";
 
   return (
     <motion.section
@@ -236,18 +239,20 @@ export default function SkillsSection() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="w-full max-w-7xl mx-auto px-6 py-24 relative z-10 scroll-mt-24 border-t border-white/5"
+      className="w-full max-w-7xl mx-auto px-6 py-24 relative z-10 scroll-mt-24 border-t border-fg/5"
     >
       {/* Header Section */}
       <div className="flex flex-col items-center justify-center text-center mb-16">
-        <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase select-none">
+        <h2 className="text-3xl md:text-5xl font-black tracking-tight text-fg uppercase select-none">
           The Magic <span className={`italic font-serif normal-case tracking-normal ${tokens.text} drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] transition-colors duration-300`}>Behind</span>
         </h2>
       </div>
 
       {/* Modern Bubble/Capsule Flow Cloud with default glow and interactive animations */}
       <div className="flex flex-wrap items-center justify-center gap-3.5 max-w-[90vw] md:max-w-5xl mx-auto">
-        {updatedSkillsData.map((skill, index) => (
+        {updatedSkillsData.map((skill, index) => {
+            const glow = skill.hex === "#FFFFFF" ? (theme === "light" ? "#161412" : "#FFFFFF") : skill.hex;
+            return (
           <motion.div
             key={skill.name}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -257,22 +262,23 @@ export default function SkillsSection() {
             whileHover={{
               y: -4,
               scale: 1.04,
-              borderColor: `${skill.hex}50`,
-              boxShadow: `0 8px 25px ${skill.hex}25, inset 0 0 10px ${skill.hex}15`,
-              backgroundColor: "rgba(0, 0, 0, 0.85)"
+              borderColor: `${glow}50`,
+              boxShadow: `0 8px 25px ${glow}25, inset 0 0 10px ${glow}15`,
+              backgroundColor: chipHoverFill
             }}
-            className="flex items-center gap-2.5 px-4 py-2.5 bg-[#0b0b0b]/65 backdrop-blur-md border rounded-full text-white/80 cursor-default select-none transition-colors duration-300 ease-out hover:text-white"
+            className="flex items-center gap-2.5 px-4 py-2.5 bg-surface/65 backdrop-blur-md border rounded-full text-fg/80 cursor-default select-none transition-colors duration-300 ease-out hover:text-fg"
             style={{
-              borderColor: `${skill.hex}18`,
-              boxShadow: `0 3px 12px ${skill.hex}0c, inset 0 0 6px ${skill.hex}08`
+              borderColor: `${glow}18`,
+              boxShadow: `0 3px 12px ${glow}0c, inset 0 0 6px ${glow}08`
             }}
           >
             {skill.icon}
-            <span className="tracking-wide font-mono text-[11px] font-medium leading-none uppercase filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)]">
+            <span className="tracking-wide font-mono text-[11px] font-medium leading-none uppercase filter drop-shadow-[0_1px_1px_rgba(0,0,0,0.4)] light:drop-shadow-none">
               {skill.name}
             </span>
           </motion.div>
-        ))}
+            );
+        })}
       </div>
     </motion.section>
   );

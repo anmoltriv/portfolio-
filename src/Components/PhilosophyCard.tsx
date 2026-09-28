@@ -12,7 +12,7 @@ export default function PhilosophyCard() {
 
   return (
     <div
-      className={`md:col-span-2 bg-[#0c0c0c] border border-white/10 rounded-2xl p-8 flex flex-col justify-between transition-all duration-500 relative overflow-hidden group hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${tokens.cardHover}`}
+      className={`md:col-span-2 bg-surface border border-fg/10 rounded-2xl p-8 flex flex-col justify-between transition-all duration-500 relative overflow-hidden group hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
     >
       {/* Pulsing light ring based on active accent selection */}
       <div
@@ -22,19 +22,19 @@ export default function PhilosophyCard() {
       <div>
         <div className="flex items-center gap-2 mb-6">
           <Layers className={`w-4 h-4 ${tokens.text}`} />
-          <span className="text-[10px] text-white/40 uppercase tracking-[0.25em] font-mono">
+          <span className="text-[10px] text-fg/40 uppercase tracking-[0.25em] font-mono">
             My Philosophy
           </span>
         </div>
 
         <h2
-          className={`text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-white transition-all duration-300 ${tokens.groupHoverText}`}
+          className={`text-3xl md:text-4xl font-extrabold leading-tight tracking-tight text-fg transition-all duration-300 ${tokens.groupHoverText}`}
         >
           Fullstack Logic.<br />
-          <span className="font-serif italic font-normal text-white/80">Systems that Scale</span>
+          <span className="font-serif italic font-normal text-fg/80">Systems that Scale</span>
         </h2>
 
-        <p className="text-sm md:text-base text-white/60 mt-6 leading-relaxed">
+        <p className="text-sm md:text-base text-fg/60 mt-6 leading-relaxed">
           I do not simply construct isolated backend containers or write basic scripts. I sweat the
           system throughput, the database normalization, the relational schema index metrics, the
           edge-case algorithmic logic, and the end-to-end reliability. Code should be as optimized
@@ -42,13 +42,13 @@ export default function PhilosophyCard() {
         </p>
       </div>
 
-      <div className="mt-8 pt-6 border-t border-white/5 grid grid-cols-3 gap-4">
+      <div className="mt-8 pt-6 border-t border-fg/5 grid grid-cols-3 gap-4">
         {STATS.map((stat) => (
           <div key={stat.label}>
-            <p className="text-[10px] text-white/40 uppercase tracking-widest font-mono">
+            <p className="text-[10px] text-fg/40 uppercase tracking-widest font-mono">
               {stat.label}
             </p>
-            <p className="text-lg font-bold text-white mt-1">{stat.value}</p>
+            <p className="text-lg font-bold text-fg mt-1">{stat.value}</p>
           </div>
         ))}
       </div>

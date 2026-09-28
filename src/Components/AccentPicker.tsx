@@ -12,7 +12,7 @@ export default function AccentPicker() {
       transition={{ delay: 0.45, duration: 1 }}
       className="mt-8 flex items-center gap-3"
     >
-      <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
+      <span className="text-[10px] font-mono tracking-widest text-fg/40 uppercase">
         Glow Mode:
       </span>
       {ACCENT_PICKER.map((option) => (
