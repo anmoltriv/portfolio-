@@ -75,7 +75,7 @@ export default function Hero() {
             </motion.span>
           </span>
           <br />
-          <span className="italic font-serif text-fg/60 text-base md:text-lg mt-3 block">
+          <span className="italic font-serif text-muted text-base md:text-lg mt-3 block">
             &ldquo;Structuring clean logical architecture in code, engineering pristine interfaces in design.&rdquo;
           </span>
         </motion.p>
@@ -84,11 +84,11 @@ export default function Hero() {
       </section>
 
       {/* Bottom meta rows */}
-      <div className="w-full max-w-7xl mx-auto flex justify-between items-end pb-2 px-6 font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-fg/40 z-10">
+      <div className="w-full max-w-7xl mx-auto flex justify-between items-end pb-2 px-6 font-mono text-[9px] md:text-[10px] uppercase tracking-widest text-faint z-10">
         <div className="flex items-center gap-2 relative">
           <MapPin className={`w-4 h-4 ${tokens.text}`} />
           <div className="flex flex-col text-left">
-            <span className="text-fg/40">BASED IN ROURKELA,</span>
+            <span className="text-faint">BASED IN ROURKELA,</span>
             <span className="font-bold text-fg mt-0.5">INDIA</span>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default function Hero() {
         <div className="flex items-center gap-2 text-right">
           <Code className={`w-4 h-4 ${tokens.text}`} />
           <div className="flex flex-col text-right">
-            <span className="text-fg/40">FULL STACK DEV,</span>
+            <span className="text-faint">FULL STACK DEV,</span>
             <span className="font-bold text-fg mt-0.5">&amp; SYSTEM ENGINEER</span>
           </div>
         </div>

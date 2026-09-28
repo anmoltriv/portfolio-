@@ -24,7 +24,7 @@ export default function CtaSection() {
               Let&apos;s create
             </h2>
           </div>
-          <h3 className="text-4xl md:text-6xl font-extrabold tracking-tight text-fg/40 font-sans uppercase pl-[4.5rem] md:pl-[5rem] group-hover/ctacard:text-fg/55 transition-colors duration-500">
+          <h3 className="text-4xl md:text-6xl font-extrabold tracking-tight text-muted font-sans uppercase pl-[4.5rem] md:pl-[5rem] group-hover/ctacard:text-fg transition-colors duration-500">
             something real.
           </h3>
         </div>

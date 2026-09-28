@@ -28,13 +28,13 @@ export default function Header() {
               className={`absolute -bottom-1 left-0 w-full h-[2px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ${tokens.bg}`}
             />
           </div>
-          <span className="hidden sm:inline-block text-[10px] tracking-[0.25em] font-mono text-fg/30 uppercase mt-1">
+          <span className="hidden sm:inline-block text-[10px] tracking-[0.25em] font-mono text-faint uppercase mt-1">
             • CORE UNIT
           </span>
         </div>
 
         {/* Desktop Minimal Pill Navigation */}
-        <nav className="hidden md:flex bg-fg/[0.03] border border-fg/10 px-5 py-2.5 rounded-full backdrop-blur-xl gap-8 text-[11px] uppercase tracking-widest font-semibold text-fg/40">
+        <nav className="hidden md:flex bg-fg/[0.03] border border-fg/10 px-5 py-2.5 rounded-full backdrop-blur-xl gap-8 text-[11px] uppercase tracking-widest font-semibold text-muted">
           {NAV_LINKS.map((link) => (
             <a key={link.href} href={link.href} className="hover:text-fg transition duration-200">
               {link.label}
@@ -55,7 +55,7 @@ export default function Header() {
 
           <a
             href="#twin-assistant"
-            className={`hidden md:inline-flex bg-inverse text-on-inverse active:scale-95 transition-all text-[11px] font-bold uppercase tracking-wider px-6 py-2.5 rounded-full hover:text-black duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.05)] light:shadow-[0_4px_20px_rgba(22,20,18,0.08)] ${tokens.hoverBg}`}
+            className={`hidden md:inline-flex bg-inverse text-on-inverse active:scale-95 transition-all text-[11px] font-bold uppercase tracking-wider px-6 py-2.5 rounded-full hover:text-black light:hover:text-white duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.05)] light:shadow-[0_4px_20px_rgba(22,20,18,0.08)] ${tokens.hoverBg}`}
           >
             Enquire
           </a>
@@ -89,7 +89,7 @@ export default function Header() {
           isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <nav className="flex flex-col items-center gap-6 text-sm uppercase tracking-[0.2em] font-semibold text-fg/50 light:text-fg/70">
+        <nav className="flex flex-col items-center gap-6 text-sm uppercase tracking-[0.2em] font-semibold text-muted">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}

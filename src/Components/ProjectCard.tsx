@@ -18,7 +18,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
 
   return (
     <article
-      className={`group relative bg-fg/[0.0125] border border-fg/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
+      className={`group relative bg-fill border border-fg/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
     >
       {/* Live screenshot */}
       <div className="relative aspect-video overflow-hidden bg-page-muted border-b border-fg/10">
@@ -46,9 +46,9 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
         >
           {project.title}
         </h4>
-        <p className="text-xs text-fg/50 mt-0.5">{project.tagline}</p>
+        <p className="text-xs text-muted mt-0.5">{project.tagline}</p>
 
-        <p className="text-sm text-fg/60 mt-4 leading-relaxed line-clamp-2">
+        <p className="text-sm text-muted mt-4 leading-relaxed line-clamp-2">
           {project.description}
         </p>
 
@@ -74,7 +74,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 rel="noreferrer"
                 onClick={stopBubbling}
                 title={`Open the live ${project.title} site`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-fg/70 hover:text-fg transition"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-muted hover:text-fg transition"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 Live
@@ -88,7 +88,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 rel="noreferrer"
                 onClick={stopBubbling}
                 title={`${project.title} ${repo.label} source on GitHub`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-fg/70 hover:text-fg transition"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-muted hover:text-fg transition"
               >
                 <Github className="w-3.5 h-3.5" />
                 {repo.label}

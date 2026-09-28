@@ -32,7 +32,7 @@ export default function ChatSection() {
   const isAsleep = backendStatus === "warming";
   const isOffline = backendStatus === "unreachable";
   const statusDot = isAsleep ? "bg-amber-400" : isOffline ? "bg-zinc-600" : tokens.bg;
-  const statusText = isAsleep ? "text-amber-300 light:text-amber-700" : isOffline ? "text-fg/40" : tokens.text;
+  const statusText = isAsleep ? "text-amber-300 light:text-amber-700" : isOffline ? "text-faint" : tokens.text;
 
   // Skip the first run (the welcome message on mount) so the page doesn't jump
   // down to the chat panel on load or refresh.
@@ -58,7 +58,7 @@ export default function ChatSection() {
         className={`bg-page-muted border border-fg/15 rounded-3xl overflow-hidden shadow-panel relative transition-all duration-500 hover:border-fg/25 hover:shadow-panel-hover ${tokens.panelHover}`}
       >
         {/* Internal Top Terminal Strip */}
-        <div className="bg-fg/[0.02] border-b border-fg/10 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="bg-fill border-b border-fg/10 px-6 py-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div className="flex items-center gap-3">
             <div
               className={`w-3.5 h-3.5 rounded-full relative ${statusDot} ${isOffline ? "" : "animate-pulse"}`}
@@ -77,7 +77,7 @@ export default function ChatSection() {
             </div>
           </div>
 
-          <div className="flex gap-2 text-[10px] font-mono uppercase tracking-widest text-fg/50">
+          <div className="flex gap-2 text-[10px] font-mono uppercase tracking-widest text-muted">
             <span>Model Reference</span>
             <span className={tokens.text}>gemini-2.5-flash</span>
           </div>
@@ -87,10 +87,10 @@ export default function ChatSection() {
 
           {/* Live Context Prompt Selector Column (Left side) */}
           <div className="md:col-span-1 p-6 border-b md:border-b-0 md:border-r border-fg/10 bg-fg/[0.01]">
-            <span className="text-[10px] font-mono tracking-widest text-fg/40 uppercase block mb-3">
+            <span className="text-[10px] font-mono tracking-widest text-faint uppercase block mb-3">
               Quick Prompts
             </span>
-            <p className="text-xs text-fg/50 mb-5 leading-relaxed">
+            <p className="text-xs text-muted mb-5 leading-relaxed">
               Click any pre-crafted question below to test my cognitive responsiveness, design
               opinions, or work status instantly.
             </p>
@@ -101,21 +101,21 @@ export default function ChatSection() {
                   key={question}
                   onClick={() => send(question)}
                   disabled={isLoading}
-                  className="w-full text-left font-sans text-xs bg-fg/[0.02] hover:bg-fg/5 border border-fg/10 px-4 py-3 rounded-xl transition active:scale-98 text-fg/80 hover:text-fg group flex justify-between items-center"
+                  className="w-full text-left font-sans text-xs bg-fill hover:bg-fg/5 border border-fg/10 px-4 py-3 rounded-xl transition active:scale-98 text-fg/80 hover:text-fg group flex justify-between items-center"
                 >
                   <span>{question}</span>
                   <ArrowUpRight
-                    className={`w-3.5 h-3.5 text-fg/30 transition ${tokens.groupHoverText}`}
+                    className={`w-3.5 h-3.5 text-ghost transition ${tokens.groupHoverText}`}
                   />
                 </button>
               ))}
             </div>
 
             <div className="mt-8 pt-6 border-t border-fg/5">
-              <span className="text-[10px] font-mono tracking-widest text-fg/40 uppercase block mb-3">
+              <span className="text-[10px] font-mono tracking-widest text-faint uppercase block mb-3">
                 Offline Core Bio
               </span>
-              <ul className="text-xs text-fg/50 space-y-2 font-mono">
+              <ul className="text-xs text-muted space-y-2 font-mono">
                 {BIO_FACTS.map((fact) => (
                   <li key={fact}>{fact}</li>
                 ))}
@@ -147,7 +147,7 @@ export default function ChatSection() {
                       </div>
                     )}
                   </div>
-                  <span className="text-[9px] font-mono text-fg/30 mt-1 uppercase tracking-widest">
+                  <span className="text-[9px] font-mono text-ghost mt-1 uppercase tracking-widest">
                     {message.role === "user" ? "Visitor" : "Anmol-Clone"} • {message.timestamp}
                   </span>
                 </div>
@@ -155,7 +155,7 @@ export default function ChatSection() {
 
               {isLoading && (
                 <div className="flex flex-col max-w-[85%] mr-auto items-start">
-                  <div className="px-4 py-3 rounded-2xl bg-fg/5 border border-fg/10 text-fg/40 rounded-tl-none font-mono text-xs flex items-center gap-2">
+                  <div className="px-4 py-3 rounded-2xl bg-fg/5 border border-fg/10 text-faint rounded-tl-none font-mono text-xs flex items-center gap-2">
                     <Zap className={`w-3.5 h-3.5 animate-bounce ${tokens.text}`} />
                     <span>{isAsleep ? "Waking the server, this can take a moment..." : "Thinking..."}</span>
                   </div>
@@ -177,13 +177,13 @@ export default function ChatSection() {
                 placeholder="Ask me something..."
                 disabled={isLoading}
                 aria-label="Ask Anmol's AI twin a question"
-                className={`flex-1 bg-fg/[0.03] border border-fg/10 hover:border-fg/20 focus:outline-none px-5 py-3 rounded-xl text-sm transition font-sans placeholder:text-fg/30 ${tokens.focusBorder}`}
+                className={`flex-1 bg-fg/[0.03] border border-fg/10 hover:border-fg/20 focus:outline-none px-5 py-3 rounded-xl text-sm transition font-sans placeholder:text-faint ${tokens.focusBorder}`}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
                 aria-label="Send message"
-                className={`text-black font-bold text-sm px-5 py-3 rounded-xl disabled:opacity-40 transition active:scale-95 flex items-center justify-center cursor-pointer ${tokens.bg}`}
+                className={`font-bold text-sm px-5 py-3 rounded-xl disabled:opacity-40 transition active:scale-95 flex items-center justify-center cursor-pointer ${tokens.onSolid} ${tokens.bg}`}
               >
                 <Send className="w-4 h-4" />
               </button>

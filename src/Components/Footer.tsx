@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="flex gap-8 md:gap-16">
         {FOOTER_FACTS.map((fact) => (
           <div key={fact.label}>
-            <p className="text-[9px] uppercase tracking-[0.25em] font-bold text-fg/30 mb-2">
+            <p className="text-[9px] uppercase tracking-[0.25em] font-bold text-faint mb-2">
               {fact.label}
             </p>
             <p className="text-xs font-extrabold text-fg">{fact.value}</p>
@@ -19,10 +19,10 @@ export default function Footer() {
       </div>
 
       <div className="text-left sm:text-right font-sans">
-        <p className="text-[9px] uppercase tracking-[0.25em] font-bold text-fg/30 mb-1">
+        <p className="text-[9px] uppercase tracking-[0.25em] font-bold text-faint mb-1">
           Architecture &amp; Design
         </p>
-        <p className="text-xs font-bold text-fg/60">
+        <p className="text-xs font-bold text-muted">
           Anmol Trivedi © 2026. All Rights Reserved.
         </p>
       </div>

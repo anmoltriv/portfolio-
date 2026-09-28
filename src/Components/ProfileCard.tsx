@@ -56,7 +56,7 @@ export default function ProfileCard() {
 
   return (
     <div
-      className={`md:col-span-1 bg-fg/[0.02] border border-fg/10 rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 group relative overflow-hidden hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
+      className={`md:col-span-1 bg-fill border border-fg/10 rounded-2xl p-6 flex flex-col justify-between transition-all duration-500 group relative overflow-hidden hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
     >
       <div className="absolute inset-0 bg-radial from-fg/[0.02] to-transparent pointer-events-none" />
 
@@ -106,9 +106,9 @@ export default function ProfileCard() {
         <h3 className="text-xl font-bold leading-tight flex items-center gap-1.5">
           Anmol <span className="italic font-serif font-normal text-fg/80">Trivedi</span>
         </h3>
-        <p className="text-xs text-fg/50 mt-1 font-mono">Fullstack Developer &amp; Designer</p>
+        <p className="text-xs text-muted mt-1 font-mono">Fullstack Developer &amp; Designer</p>
 
-        <div className="flex items-center gap-1.5 mt-3 text-[10px] text-fg/40 uppercase tracking-widest leading-none">
+        <div className="flex items-center gap-1.5 mt-3 text-[10px] text-faint uppercase tracking-widest leading-none">
           <MapPin className={`w-3.5 h-3.5 ${tokens.text}`} />
           <span>Rourkela, India • UTC+5:30</span>
         </div>
@@ -121,7 +121,7 @@ export default function ProfileCard() {
               target="_blank"
               rel="noreferrer"
               title={link.title}
-              className="px-3 py-1.5 rounded-lg bg-fg/5 border border-fg/10 flex items-center gap-1 text-xs text-fg/70 hover:text-fg hover:bg-fg/10 hover:border-fg/20 transition duration-200"
+              className="px-3 py-1.5 rounded-lg bg-fg/5 border border-fg/10 flex items-center gap-1 text-xs text-muted hover:text-fg hover:bg-fg/10 hover:border-fg/20 transition duration-200"
             >
               {link.icon}
               <span className="font-mono text-[10px]">{link.label}</span>

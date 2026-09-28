@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       aria-pressed={!isDark}
       title={isDark ? "Light mode" : "Dark mode"}
-      className="relative h-10 w-10 shrink-0 rounded-full border border-fg/10 bg-fg/[0.03] text-fg/70 hover:text-fg hover:bg-fg/[0.08] hover:border-fg/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-fg/30 transition-colors duration-500 flex items-center justify-center cursor-pointer"
+      className="relative h-10 w-10 shrink-0 rounded-full border border-fg/10 bg-fg/[0.03] text-muted hover:text-fg hover:bg-fg/[0.08] hover:border-fg/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-fg/30 transition-colors duration-500 flex items-center justify-center cursor-pointer"
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (

@@ -22,7 +22,7 @@ export default function PhilosophyCard() {
       <div>
         <div className="flex items-center gap-2 mb-6">
           <Layers className={`w-4 h-4 ${tokens.text}`} />
-          <span className="text-[10px] text-fg/40 uppercase tracking-[0.25em] font-mono">
+          <span className="text-[10px] text-faint uppercase tracking-[0.25em] font-mono">
             My Philosophy
           </span>
         </div>
@@ -34,7 +34,7 @@ export default function PhilosophyCard() {
           <span className="font-serif italic font-normal text-fg/80">Systems that Scale</span>
         </h2>
 
-        <p className="text-sm md:text-base text-fg/60 mt-6 leading-relaxed">
+        <p className="text-sm md:text-base text-muted mt-6 leading-relaxed">
           I do not simply construct isolated backend containers or write basic scripts. I sweat the
           system throughput, the database normalization, the relational schema index metrics, the
           edge-case algorithmic logic, and the end-to-end reliability. Code should be as optimized
@@ -45,7 +45,7 @@ export default function PhilosophyCard() {
       <div className="mt-8 pt-6 border-t border-fg/5 grid grid-cols-3 gap-4">
         {STATS.map((stat) => (
           <div key={stat.label}>
-            <p className="text-[10px] text-fg/40 uppercase tracking-widest font-mono">
+            <p className="text-[10px] text-faint uppercase tracking-widest font-mono">
               {stat.label}
             </p>
             <p className="text-lg font-bold text-fg mt-1">{stat.value}</p>

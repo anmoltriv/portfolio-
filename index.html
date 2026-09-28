@@ -10,6 +10,9 @@
       try {
         if (localStorage.getItem("theme") === "light") {
           document.documentElement.classList.add("light");
+          var glow = localStorage.getItem("light-glow");
+          document.documentElement.dataset.glow =
+            glow === "azure" || glow === "violet" || glow === "coral" ? glow : "coral";
         }
       } catch (e) {}
     </script>

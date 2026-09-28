@@ -16,7 +16,7 @@ export default function SectionHeading({ icon: Icon, eyebrow, title }: SectionHe
         <Icon className="w-5 h-5" />
       </div>
       <div>
-        <span className="text-[10px] font-mono tracking-[0.25em] text-fg/40 uppercase block">
+        <span className="text-[10px] font-mono tracking-[0.25em] text-faint uppercase block">
           {eyebrow}
         </span>
         <h2 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-fg">

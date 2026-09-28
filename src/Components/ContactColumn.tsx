@@ -26,7 +26,7 @@ export default function ContactColumn() {
 
       {/* Available Status Block */}
       <div
-        className={`bg-fg/[0.02] border border-fg/10 rounded-2xl p-5 flex items-center gap-3.5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] light:hover:shadow-[0_8px_24px_rgba(22,20,18,0.06)] ${tokens.cardHoverTinted}`}
+        className={`bg-fill border border-fg/10 rounded-2xl p-5 flex items-center gap-3.5 transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] light:hover:shadow-[0_8px_24px_rgba(22,20,18,0.06)] ${tokens.cardHoverTinted}`}
       >
         <div className="relative flex h-3 w-3">
           <span
@@ -35,7 +35,7 @@ export default function ContactColumn() {
           <span className={`relative inline-flex rounded-full h-3 w-3 ${tokens.bg}`} />
         </div>
         <div className="flex-1">
-          <p className="text-[10px] uppercase tracking-wider font-mono text-fg/40">Status</p>
+          <p className="text-[10px] uppercase tracking-wider font-mono text-faint">Status</p>
           <p className={`text-xs font-bold uppercase tracking-widest mt-0.5 ${tokens.text}`}>
             Available for Work &amp; Internships
           </p>
@@ -44,16 +44,16 @@ export default function ContactColumn() {
 
       {/* Direct Copy Action Block */}
       <div
-        className={`bg-fg/[0.02] border border-fg/10 rounded-2xl p-5 flex-1 flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
+        className={`bg-fill border border-fg/10 rounded-2xl p-5 flex-1 flex flex-col justify-between transition-all duration-500 hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
       >
         <div>
-          <span className="text-[10px] text-fg/40 uppercase tracking-[0.2em] font-mono block mb-1">
+          <span className="text-[10px] text-faint uppercase tracking-[0.2em] font-mono block mb-1">
             Email Contact
           </span>
           <p className={`text-sm font-medium tracking-tight truncate font-mono ${tokens.text}`}>
             {EMAIL}
           </p>
-          <span className="text-[10px] text-fg/40 uppercase tracking-[0.2em] font-mono block mt-3 mb-1">
+          <span className="text-[10px] text-faint uppercase tracking-[0.2em] font-mono block mt-3 mb-1">
             Phone Line
           </span>
           <p className="text-xs font-mono text-fg/80">{PHONE}</p>
@@ -71,7 +71,7 @@ export default function ContactColumn() {
               </>
             ) : (
               <>
-                <Copy className="w-3.5 h-3.5 text-fg/60" />
+                <Copy className="w-3.5 h-3.5 text-muted" />
                 <span className="font-mono">Copy Email Address</span>
               </>
             )}
@@ -83,20 +83,20 @@ export default function ContactColumn() {
       <button
         type="button"
         onClick={() => send("Tell me about your tech experiences and resume info")}
-        className={`bg-fg/[0.02] border border-fg/10 rounded-2xl p-4 flex items-center justify-between text-left transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:bg-fg/[0.04] hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] light:hover:shadow-[0_8px_24px_rgba(22,20,18,0.06)] ${tokens.cardHover}`}
+        className={`bg-fill border border-fg/10 rounded-2xl p-4 flex items-center justify-between text-left transition-all duration-500 cursor-pointer hover:-translate-y-1 hover:bg-fg/[0.04] hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] light:hover:shadow-[0_8px_24px_rgba(22,20,18,0.06)] ${tokens.cardHover}`}
       >
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-orange-950/20 text-orange-400 border border-orange-500/10 light:bg-orange-100 light:text-orange-700 light:border-orange-500/20">
             <FileText className="w-4 h-4" />
           </div>
           <div>
-            <p className="text-[10px] text-fg/40 uppercase tracking-widest font-mono">
+            <p className="text-[10px] text-faint uppercase tracking-widest font-mono">
               Curriculum Vitae
             </p>
             <p className="text-xs font-bold text-fg mt-0.5">Quick Facts</p>
           </div>
         </div>
-        <ArrowUpRight className="w-4 h-4 text-fg/40" />
+        <ArrowUpRight className="w-4 h-4 text-faint" />
       </button>
 
     </div>

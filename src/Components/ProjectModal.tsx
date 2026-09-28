@@ -18,7 +18,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
         <button
           onClick={onClose}
           aria-label="Close project details"
-          className="absolute top-4 right-4 z-10 text-fg/70 hover:text-fg transition p-1.5 rounded-lg bg-page/80 backdrop-blur-md border border-fg/10"
+          className="absolute top-4 right-4 z-10 text-muted hover:text-fg transition p-1.5 rounded-lg bg-page/80 backdrop-blur-md border border-fg/10"
         >
           <X className="w-5 h-5" />
         </button>
@@ -41,14 +41,14 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             <h3 className="text-3xl font-extrabold tracking-tight text-fg mt-1">
               {project.title}
             </h3>
-            <p className="text-xs font-mono text-fg/40 mt-1">{project.tagline}</p>
+            <p className="text-xs font-mono text-faint mt-1">{project.tagline}</p>
           </div>
 
-          <p className="text-sm text-fg/70 leading-relaxed font-sans">
+          <p className="text-sm text-muted leading-relaxed font-sans">
             {project.detailedDescription}
           </p>
 
-          <ul className="mt-6 space-y-3 pl-4 border-l border-fg/10 text-sm text-fg/70 leading-relaxed list-none">
+          <ul className="mt-6 space-y-3 pl-4 border-l border-fg/10 text-sm text-muted leading-relaxed list-none">
             {project.highlights.map((highlight) => (
               <li
                 key={highlight}
@@ -60,8 +60,8 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
           </ul>
 
           {project.metrics && (
-            <div className="mt-8 bg-fg/[0.02] border border-fg/10 rounded-xl p-4 flex justify-between items-center">
-              <span className="text-xs text-fg/50 uppercase tracking-widest font-mono">
+            <div className="mt-8 bg-fill border border-fg/10 rounded-xl p-4 flex justify-between items-center">
+              <span className="text-xs text-muted uppercase tracking-widest font-mono">
                 Performance Metric
               </span>
               <span className={`text-sm font-bold font-mono ${tokens.text}`}>
@@ -74,7 +74,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] font-mono bg-fg/5 border border-fg/10 px-3 py-1 rounded-full text-fg/70"
+                className="text-[10px] font-mono bg-fg/5 border border-fg/10 px-3 py-1 rounded-full text-muted"
               >
                 {tag}
               </span>
@@ -98,7 +98,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.demoLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-fg/70 hover:text-fg transition"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-muted hover:text-fg transition"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   Live Site
@@ -110,7 +110,7 @@ export default function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={repo.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-fg/70 hover:text-fg transition"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-muted hover:text-fg transition"
                 >
                   <Github className="w-3.5 h-3.5" />
                   {repo.label}

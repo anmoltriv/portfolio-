@@ -19,10 +19,30 @@
   inherits: true;
   initial-value: #0c0c0c;
 }
+@property --fill {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0c0c0c;
+}
 @property --fg {
   syntax: "<color>";
   inherits: true;
   initial-value: #ffffff;
+}
+@property --muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #cfcfcf;
+}
+@property --faint {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #9a9a9a;
+}
+@property --ghost {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #6e6e6e;
 }
 @property --inverse {
   syntax: "<color>";
@@ -40,7 +60,11 @@
   --page: #050505;
   --page-muted: #090909;
   --surface: #0c0c0c;
+  --fill: rgba(255, 255, 255, 0.03);
   --fg: #ffffff;
+  --muted: rgba(255, 255, 255, 0.72);
+  --faint: rgba(255, 255, 255, 0.55);
+  --ghost: rgba(255, 255, 255, 0.4);
   --inverse: #ffffff;
   --on-inverse: #0a0a0a;
   --elev-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
@@ -49,21 +73,64 @@
 }
 
 /*
- * Light mode classes — warm paper canvas against near-black ink, so the
- * existing emerald / blue / amber glow still reads as the accent, not the
- * background. Borders and fills are the inverted white overlays from dark mode.
+ * Light mode — paper canvas + ink, not inverted-dark-mode. Secondary text uses
+ * solid charcoal instead of translucent gray so labels stay readable. Glow
+ * modes (coral / azure / violet) retint the page, orbs, and accents.
  */
 html.light {
   color-scheme: light;
-  --page: #f3efe6;
-  --page-muted: #faf7f1;
-  --surface: #fffcf7;
-  --fg: #161412;
-  --inverse: #161412;
-  --on-inverse: #f3efe6;
-  --elev-shadow: 0 16px 40px rgba(22, 20, 18, 0.08);
-  --panel-shadow: 0 24px 50px rgba(22, 20, 18, 0.08);
-  --panel-shadow-hover: 0 32px 64px rgba(22, 20, 18, 0.12);
+  --page: #faf6f2;
+  --page-muted: #fffdfb;
+  --surface: #ffffff;
+  --fill: #ffffff;
+  --fg: #161310;
+  --muted: #3a342f;
+  --faint: #534c45;
+  --ghost: #6a625a;
+  --inverse: #161310;
+  --on-inverse: #faf6f2;
+  --elev-shadow: 0 14px 36px rgba(28, 22, 18, 0.08);
+  --panel-shadow: 0 22px 48px rgba(28, 22, 18, 0.08);
+  --panel-shadow-hover: 0 30px 60px rgba(28, 22, 18, 0.12);
+}
+
+html.light[data-glow="coral"] {
+  --page: #faf4f0;
+  --page-muted: #fffaf7;
+  --surface: #ffffff;
+  --fill: #ffffff;
+  --fg: #1a1311;
+  --muted: #3c322d;
+  --faint: #564940;
+  --ghost: #6c5e54;
+  --inverse: #1a1311;
+  --on-inverse: #faf4f0;
+}
+
+html.light[data-glow="azure"] {
+  --page: #f3f6fb;
+  --page-muted: #f8fafd;
+  --surface: #ffffff;
+  --fill: #ffffff;
+  --fg: #11161c;
+  --muted: #2d343d;
+  --faint: #46515c;
+  --ghost: #5c6874;
+  --inverse: #11161c;
+  --on-inverse: #f3f6fb;
+}
+
+html.light[data-glow="violet"] {
+  --page: #f6f4fb;
+  --page-muted: #fbfafe;
+  --surface: #ffffff;
+  --fill: #ffffff;
+  --fg: #16121c;
+  --muted: #342e3c;
+  --faint: #4e4658;
+  --ghost: #645b6e;
+  --inverse: #16121c;
+  --on-inverse: #f6f4fb;
 }
 
 html {
@@ -75,7 +142,11 @@ html {
     --page 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     --page-muted 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     --surface 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    --fill 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     --fg 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    --muted 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    --faint 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    --ghost 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     --inverse 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     --on-inverse 0.55s cubic-bezier(0.22, 1, 0.36, 1),
     background-color 0.55s cubic-bezier(0.22, 1, 0.36, 1),
@@ -95,7 +166,11 @@ body {
   --color-page: var(--page);
   --color-page-muted: var(--page-muted);
   --color-surface: var(--surface);
+  --color-fill: var(--fill);
   --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-ghost: var(--ghost);
   --color-inverse: var(--inverse);
   --color-on-inverse: var(--on-inverse);
   --shadow-lift: var(--elev-shadow);
