@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, Copy, FileText } from "lucide-react";
 import { useAccent } from "../theme/AccentContext";
 import { useChat } from "../chat/ChatContext";
+import GithubHeatmap from "./GithubHeatmap";
 
 const EMAIL = "anmolop.works@gmail.com";
 const PHONE = "(+91) 6387297103";
@@ -59,7 +60,11 @@ export default function ContactColumn() {
           <p className="text-xs font-mono text-fg/80">{PHONE}</p>
         </div>
 
-        <div className="mt-4">
+        <div className="flex-1 min-h-[8.5rem] flex flex-col justify-center py-5 overflow-hidden">
+          <GithubHeatmap />
+        </div>
+
+        <div>
           <button
             onClick={copyEmail}
             className="w-full flex items-center justify-center gap-2 bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/20 text-xs py-2 rounded-lg text-fg/80 active:scale-95 transition-all font-semibold"

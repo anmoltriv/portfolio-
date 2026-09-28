@@ -1,5 +1,8 @@
 const DEV_API_FALLBACK = "http://localhost:3001";
 
+export const GITHUB_USERNAME = "anmoltriv";
+export const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
+
 /**
  * Public URL of the chat backend (deployed separately from this static site).
  * Set VITE_API_URL at build time; Vite inlines it, so it must exist in the
