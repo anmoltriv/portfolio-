@@ -85,11 +85,11 @@ export default function Header() {
       {/* Mobile Drawer Overlay */}
       <div
         inert={!isMenuOpen}
-        className={`fixed inset-0 h-screen w-screen bg-page/95 backdrop-blur-2xl transition-all duration-300 md:hidden flex flex-col items-center justify-center gap-8 ${
+        className={`fixed inset-0 h-screen w-screen bg-page backdrop-blur-2xl transition-all duration-300 md:hidden flex flex-col items-center justify-center gap-8 ${
           isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
-        <nav className="flex flex-col items-center gap-6 text-sm uppercase tracking-[0.2em] font-semibold text-fg/50">
+        <nav className="flex flex-col items-center gap-6 text-sm uppercase tracking-[0.2em] font-semibold text-fg/50 light:text-fg/70">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
