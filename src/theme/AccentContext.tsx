@@ -25,7 +25,7 @@ function readStoredLightGlow(): LightAccentName {
   } catch {
     // Private mode can block storage.
   }
-  return "coral";
+  return "sage";
 }
 
 function applyGlowDataset(name: AccentName): void {

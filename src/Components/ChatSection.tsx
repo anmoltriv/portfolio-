@@ -142,7 +142,7 @@ export default function ChatSection() {
                     {message.role === "user" ? (
                       message.content
                     ) : (
-                      <div className="markdown-body text-sm max-w-none text-fg/90 space-y-2 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mt-1.5 [&_strong]:text-fg [&_strong]:font-bold [&_a]:text-pink-400 hover:[&_a]:text-pink-300 light:[&_a]:text-pink-600 light:hover:[&_a]:text-pink-500 hover:[&_a]:underline">
+                      <div className="markdown-body text-sm max-w-none text-fg/90 space-y-2 [&_p]:leading-relaxed [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_li]:mt-1.5 [&_strong]:text-fg [&_strong]:font-bold [&_a]:text-sky-400 hover:[&_a]:text-sky-300 light:[&_a]:text-sky-700 light:hover:[&_a]:text-sky-800 hover:[&_a]:underline">
                         <Markdown>{message.content}</Markdown>
                       </div>
                     )}

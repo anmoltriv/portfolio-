@@ -1,11 +1,11 @@
 export type DarkAccentName = "emerald" | "blue" | "amber";
-export type LightAccentName = "coral" | "azure" | "violet";
+export type LightAccentName = "sage" | "azure" | "violet";
 export type AccentName = DarkAccentName | LightAccentName;
 
 export const LIGHT_GLOW_STORAGE_KEY = "light-glow";
 
 export function isLightAccentName(name: string): name is LightAccentName {
-  return name === "coral" || name === "azure" || name === "violet";
+  return name === "sage" || name === "azure" || name === "violet";
 }
 
 export function isDarkAccentName(name: string): name is DarkAccentName {
@@ -116,32 +116,31 @@ export const DARK_ACCENTS: Record<DarkAccentName, AccentTokens> = {
 };
 
 /**
- * Light-mode glow palettes. These are the accents actually used on paper
- * portfolios — coral, azure, violet — not the neon emerald/blue/amber that
- * only read on a black canvas.
+ * Light-mode glow palettes used on paper portfolios — sage, azure, violet.
+ * No red/coral: that family fights the ink-on-paper contrast.
  */
 export const LIGHT_ACCENTS: Record<LightAccentName, AccentTokens> = {
-  coral: {
-    text: "text-rose-700",
-    hoverText: "hover:text-rose-700",
-    groupHoverText: "group-hover:text-rose-700",
-    bg: "bg-rose-500",
-    hoverBg: "hover:bg-rose-500",
-    beforeBg: "before:bg-rose-500",
-    ping: "bg-rose-500",
-    border: "border-rose-400/40",
-    badgeBg: "bg-rose-50",
-    badgeText: "text-rose-800",
-    focusBorder: "focus:border-rose-500",
-    pickerRing: "ring-rose-400/50",
-    radialFrom: "from-rose-400/25",
-    ringGlow: "bg-rose-400",
-    cardHover: "hover:shadow-rose-400/20 hover:border-rose-300",
-    cardHoverTinted: "hover:shadow-rose-400/20 hover:border-rose-300 hover:bg-rose-50",
-    panelHover: "hover:shadow-rose-400/15",
-    photoGlow: "bg-rose-400/35 shadow-[0_0_28px_#fb7185]",
-    orbs: ["bg-rose-200/70", "bg-orange-100/65", "bg-amber-50/70"],
-    selection: "selection:bg-rose-200 selection:text-rose-900",
+  sage: {
+    text: "text-teal-800",
+    hoverText: "hover:text-teal-800",
+    groupHoverText: "group-hover:text-teal-800",
+    bg: "bg-teal-600",
+    hoverBg: "hover:bg-teal-600",
+    beforeBg: "before:bg-teal-600",
+    ping: "bg-teal-600",
+    border: "border-teal-500/35",
+    badgeBg: "bg-teal-50",
+    badgeText: "text-teal-900",
+    focusBorder: "focus:border-teal-600",
+    pickerRing: "ring-teal-500/45",
+    radialFrom: "from-teal-400/20",
+    ringGlow: "bg-teal-400",
+    cardHover: "hover:shadow-teal-500/15 hover:border-teal-300",
+    cardHoverTinted: "hover:shadow-teal-500/15 hover:border-teal-300 hover:bg-teal-50",
+    panelHover: "hover:shadow-teal-500/12",
+    photoGlow: "bg-teal-400/30 shadow-[0_0_28px_#2dd4bf]",
+    orbs: ["bg-teal-200/65", "bg-emerald-100/50", "bg-stone-100/60"],
+    selection: "selection:bg-teal-200 selection:text-teal-900",
     onSolid: "text-white"
   },
   azure: {
@@ -186,7 +185,7 @@ export const LIGHT_ACCENTS: Record<LightAccentName, AccentTokens> = {
     cardHoverTinted: "hover:shadow-violet-400/20 hover:border-violet-300 hover:bg-violet-50",
     panelHover: "hover:shadow-violet-400/15",
     photoGlow: "bg-violet-400/35 shadow-[0_0_28px_#a78bfa]",
-    orbs: ["bg-violet-200/65", "bg-fuchsia-100/55", "bg-indigo-100/50"],
+    orbs: ["bg-violet-200/65", "bg-indigo-100/55", "bg-slate-100/50"],
     selection: "selection:bg-violet-200 selection:text-violet-900",
     onSolid: "text-white"
   }
@@ -199,7 +198,7 @@ export const DARK_ACCENT_PICKER: { name: DarkAccentName; label: string; swatch: 
 ];
 
 export const LIGHT_ACCENT_PICKER: { name: LightAccentName; label: string; swatch: string }[] = [
-  { name: "coral", label: "Bloom Coral", swatch: "bg-rose-500" },
+  { name: "sage", label: "Grove Sage", swatch: "bg-teal-600" },
   { name: "azure", label: "Studio Azure", swatch: "bg-sky-500" },
   { name: "violet", label: "Atelier Violet", swatch: "bg-violet-500" }
 ];

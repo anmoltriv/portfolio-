@@ -75,36 +75,36 @@
 /*
  * Light mode — paper canvas + ink, not inverted-dark-mode. Secondary text uses
  * solid charcoal instead of translucent gray so labels stay readable. Glow
- * modes (coral / azure / violet) retint the page, orbs, and accents.
+ * modes (sage / azure / violet) retint the page, orbs, and accents.
  */
 html.light {
   color-scheme: light;
-  --page: #faf6f2;
-  --page-muted: #fffdfb;
+  --page: #f4f7f4;
+  --page-muted: #fbfcfb;
   --surface: #ffffff;
   --fill: #ffffff;
-  --fg: #161310;
-  --muted: #3a342f;
-  --faint: #534c45;
-  --ghost: #6a625a;
-  --inverse: #161310;
-  --on-inverse: #faf6f2;
-  --elev-shadow: 0 14px 36px rgba(28, 22, 18, 0.08);
-  --panel-shadow: 0 22px 48px rgba(28, 22, 18, 0.08);
-  --panel-shadow-hover: 0 30px 60px rgba(28, 22, 18, 0.12);
+  --fg: #141816;
+  --muted: #323834;
+  --faint: #4a524c;
+  --ghost: #5e6861;
+  --inverse: #141816;
+  --on-inverse: #f4f7f4;
+  --elev-shadow: 0 14px 36px rgba(20, 28, 24, 0.08);
+  --panel-shadow: 0 22px 48px rgba(20, 28, 24, 0.08);
+  --panel-shadow-hover: 0 30px 60px rgba(20, 28, 24, 0.12);
 }
 
-html.light[data-glow="coral"] {
-  --page: #faf4f0;
-  --page-muted: #fffaf7;
+html.light[data-glow="sage"] {
+  --page: #f3f7f4;
+  --page-muted: #fafcfb;
   --surface: #ffffff;
   --fill: #ffffff;
-  --fg: #1a1311;
-  --muted: #3c322d;
-  --faint: #564940;
-  --ghost: #6c5e54;
-  --inverse: #1a1311;
-  --on-inverse: #faf4f0;
+  --fg: #141816;
+  --muted: #323834;
+  --faint: #4a524c;
+  --ghost: #5e6861;
+  --inverse: #141816;
+  --on-inverse: #f3f7f4;
 }
 
 html.light[data-glow="azure"] {
