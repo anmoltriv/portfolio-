@@ -138,24 +138,52 @@ html {
   scroll-padding-top: 1.5rem;
   background-color: var(--page);
   color: var(--fg);
-  transition:
-    --page 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --page-muted 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --surface 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --fill 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --fg 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --muted 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --faint 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --ghost 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --inverse 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    --on-inverse 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    color 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 body {
   background-color: var(--page);
   color: var(--fg);
+}
+
+/*
+ * Theme toggle uses the View Transitions API: two screenshots, one crossfade.
+ * plus-lighter (the default) washes the mix and feels laggy; a normal fade
+ * composites on the GPU and stays sharp.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation-duration: 0.42s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+  animation-name: theme-fade-out;
+}
+
+::view-transition-new(root) {
+  z-index: 2;
+  animation-name: theme-fade-in;
+}
+
+@keyframes theme-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes theme-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }
 
 @theme {

@@ -1,6 +1,12 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useMemo, useState } from "react";
+import { flushSync } from "react-dom";
 import type { ReactNode } from "react";
-import { applyThemeClass, getStoredTheme, THEME_STORAGE_KEY } from "./theme";
+import {
+  applyAppearance,
+  getStoredTheme,
+  persistTheme,
+  withThemeTransition
+} from "./theme";
 import type { ThemeName } from "./theme";
 
 interface ThemeContextValue {
@@ -11,29 +17,31 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
+function commitTheme(next: ThemeName, setThemeState: (theme: ThemeName) => void): void {
+  // Class + glow land before React paints so the view-transition snapshot is complete.
+  applyAppearance(next);
+  persistTheme(next);
+  flushSync(() => {
+    setThemeState(next);
+  });
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setThemeState] = useState<ThemeName>(() => {
     const initial = getStoredTheme();
-    applyThemeClass(initial);
+    applyAppearance(initial);
     return initial;
   });
 
-  useEffect(() => {
-    applyThemeClass(theme);
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, theme);
-    } catch {
-      // Private mode can block storage; the in-memory class still applies.
-    }
+  const setTheme = useCallback((next: ThemeName) => {
+    if (next === theme) return;
+    withThemeTransition(() => commitTheme(next, setThemeState));
   }, [theme]);
 
-  const setTheme = useCallback((next: ThemeName) => {
-    setThemeState(next);
-  }, []);
-
   const toggleTheme = useCallback(() => {
-    setThemeState((prev) => (prev === "dark" ? "light" : "dark"));
-  }, []);
+    const next: ThemeName = theme === "dark" ? "light" : "dark";
+    withThemeTransition(() => commitTheme(next, setThemeState));
+  }, [theme]);
 
   const value = useMemo(
     () => ({ theme, setTheme, toggleTheme }),

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import {
   DARK_ACCENTS,
@@ -9,6 +9,7 @@ import {
 } from "./accent";
 import type { AccentName, AccentTokens, DarkAccentName, LightAccentName } from "./accent";
 import { useTheme } from "./ThemeContext";
+import { registerGlow } from "./theme";
 
 interface AccentContextValue {
   accent: AccentName;
@@ -40,7 +41,10 @@ export function AccentProvider({ children }: { children: ReactNode }) {
   const accent: AccentName = theme === "light" ? lightAccent : darkAccent;
   const tokens = theme === "light" ? LIGHT_ACCENTS[lightAccent] : DARK_ACCENTS[darkAccent];
 
-  useEffect(() => {
+  registerGlow("dark", darkAccent);
+  registerGlow("light", lightAccent);
+
+  useLayoutEffect(() => {
     applyGlowDataset(accent);
   }, [accent]);
 
