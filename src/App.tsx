@@ -23,7 +23,6 @@ function Portfolio() {
 
   return (
     <div
-      id="immersive-portfolio-root"
       className={`min-h-screen bg-page text-fg font-sans flex flex-col justify-between overflow-x-hidden relative ${tokens.selection}`}
     >
       <AmbientOrbs />

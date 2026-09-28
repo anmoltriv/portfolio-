@@ -11,7 +11,6 @@ import type { ThemeName } from "./theme";
 
 interface ThemeContextValue {
   theme: ThemeName;
-  setTheme: (theme: ThemeName) => void;
   toggleTheme: () => void;
 }
 
@@ -33,19 +32,14 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     return initial;
   });
 
-  const setTheme = useCallback((next: ThemeName) => {
-    if (next === theme) return;
-    withThemeTransition(() => commitTheme(next, setThemeState));
-  }, [theme]);
-
   const toggleTheme = useCallback(() => {
     const next: ThemeName = theme === "dark" ? "light" : "dark";
     withThemeTransition(() => commitTheme(next, setThemeState));
   }, [theme]);
 
   const value = useMemo(
-    () => ({ theme, setTheme, toggleTheme }),
-    [theme, setTheme, toggleTheme]
+    () => ({ theme, toggleTheme }),
+    [theme, toggleTheme]
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

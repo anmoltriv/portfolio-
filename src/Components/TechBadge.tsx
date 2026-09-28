@@ -92,26 +92,6 @@ const BRANDS: BrandEntry[] = [
     )
   },
   {
-    keywords: ["mongo"],
-    color: "#13AA52",
-    icon: (
-      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2c-.5 0-9 4.5-9 10a9 9 0 0 0 9 9c.5 0 9-4.5 9-10A9 9 0 0 0 12 2z" />
-        <path d="M12 2v20" />
-      </svg>
-    )
-  },
-  {
-    keywords: ["redux"],
-    color: "#764ABC",
-    icon: (
-      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0" />
-      </svg>
-    )
-  },
-  {
     keywords: ["typescript"],
     color: "#3178C6",
     icon: (

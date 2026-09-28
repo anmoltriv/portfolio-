@@ -21,8 +21,7 @@ export const projectsData: Project[] = [
     repos: [
       { label: "Backend", url: "https://github.com/anmoltriv/chat-app-backend" },
       { label: "Frontend", url: "https://github.com/anmoltriv/chat-app-frontend" }
-    ],
-    featured: true
+    ]
   },
   {
     id: "contentai",
@@ -39,8 +38,7 @@ export const projectsData: Project[] = [
     tags: ["React.js", "Node.js", "Express.js", "Neon DB (PostgreSQL)", "ClerkAuth", "Cloudinary", "Gemini API", "Tailwind CSS"],
     metrics: { label: "Asset Load Cut", value: "35%" },
     demoLink: "https://content-ai-kohl.vercel.app/",
-    repos: [],
-    featured: true
+    repos: []
   }
 ];
 
