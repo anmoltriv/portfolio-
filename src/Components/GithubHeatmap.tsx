@@ -1,12 +1,14 @@
 import { GITHUB_PROFILE_URL } from "../config";
-import { heatLevel, monthLabel } from "../git/github";
+import { formatISODate, heatLevel, monthLabel } from "../git/github";
 import { useGit } from "../git/GitContext";
 import { useAccent } from "../theme/AccentContext";
 
 function monthLabelsForWeeks(weeks: { date: string }[][]): (string | null)[] {
+  const today = formatISODate(new Date());
+
   return weeks.map((week, index) => {
     const monthStart = week.find((day) => day.date.endsWith("-01"));
-    if (monthStart) return monthLabel(monthStart.date);
+    if (monthStart && monthStart.date <= today) return monthLabel(monthStart.date);
 
     // Keep the opening month, unless the next week already carries the 1st.
     if (index === 0 && !weeks[1]?.some((day) => day.date.endsWith("-01"))) {
@@ -43,7 +45,7 @@ export default function GithubHeatmap() {
       >
         <div
           className="grid mb-1"
-          style={{ gridTemplateColumns: `repeat(${weeks.length}, 9px)`, columnGap: 3 }}
+          style={{ gridTemplateColumns: `repeat(${weeks.length}, 10px)`, columnGap: 3 }}
         >
           {labels.map((label, index) => (
             <span key={`label-${weeks[index][0].date}`} className="relative h-3">
