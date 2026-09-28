@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Project } from "./types";
-import { AccentProvider } from "./theme/AccentContext";
+import { AccentProvider, useAccent } from "./theme/AccentContext";
+import { ThemeProvider } from "./theme/ThemeContext";
 import { ChatProvider } from "./chat/ChatContext";
 import { useScrollToTopOnLoad } from "./hooks/useScrollToTopOnLoad";
 import AmbientOrbs from "./Components/AmbientOrbs";
@@ -17,12 +18,12 @@ import Footer from "./Components/Footer";
 
 function Portfolio() {
   useScrollToTopOnLoad();
+  const { tokens } = useAccent();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <div
-      id="immersive-portfolio-root"
-      className="min-h-screen bg-[#050505] text-white font-sans flex flex-col justify-between overflow-x-hidden relative selection:bg-emerald-500/30 selection:text-emerald-400"
+      className={`min-h-screen bg-page text-fg font-sans flex flex-col justify-between overflow-x-hidden relative ${tokens.selection}`}
     >
       <AmbientOrbs />
       <Header />
@@ -45,10 +46,12 @@ function Portfolio() {
 
 export default function App() {
   return (
-    <AccentProvider>
-      <ChatProvider>
-        <Portfolio />
-      </ChatProvider>
-    </AccentProvider>
+    <ThemeProvider>
+      <AccentProvider>
+        <ChatProvider>
+          <Portfolio />
+        </ChatProvider>
+      </AccentProvider>
+    </ThemeProvider>
   );
 }

@@ -17,7 +17,7 @@ export default function ProjectsSection({ onSelect }: ProjectsSectionProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="w-full max-w-7xl mx-auto px-6 py-16 relative z-10 scroll-mt-24 border-t border-white/5"
+      className="w-full max-w-7xl mx-auto px-6 py-16 relative z-10 scroll-mt-24 border-t border-fg/5"
     >
       <SectionHeading icon={Code} eyebrow="Curated Work" title="Selected Projects" />
 

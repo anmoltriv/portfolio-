@@ -18,10 +18,10 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
 
   return (
     <article
-      className={`group relative bg-white/[0.0125] border border-white/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_12px_40px_rgba(0,0,0,0.6)] ${tokens.cardHover}`}
+      className={`group relative bg-fill border border-fg/10 rounded-2xl overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-1 hover:shadow-lift ${tokens.cardHover}`}
     >
       {/* Live screenshot */}
-      <div className="relative aspect-video overflow-hidden bg-[#0a0a0a] border-b border-white/10">
+      <div className="relative aspect-video overflow-hidden bg-page-muted border-b border-fg/10">
         <img
           src={project.image}
           alt={`${project.title} user interface`}
@@ -42,13 +42,13 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
 
       <div className="p-6 flex flex-col flex-1">
         <h4
-          className={`text-xl font-bold tracking-tight text-white transition-all duration-300 ${tokens.groupHoverText}`}
+          className={`text-xl font-bold tracking-tight text-fg transition-all duration-300 ${tokens.groupHoverText}`}
         >
           {project.title}
         </h4>
-        <p className="text-xs text-white/50 mt-0.5">{project.tagline}</p>
+        <p className="text-xs text-muted mt-0.5">{project.tagline}</p>
 
-        <p className="text-sm text-white/60 mt-4 leading-relaxed line-clamp-2">
+        <p className="text-sm text-muted mt-4 leading-relaxed line-clamp-2">
           {project.description}
         </p>
 
@@ -58,7 +58,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
           ))}
         </div>
 
-        <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between gap-4">
+        <div className="mt-auto pt-4 border-t border-fg/5 flex items-center justify-between gap-4">
           <span
             className={`flex items-center gap-1.5 text-[10px] font-mono tracking-widest uppercase font-semibold group-hover:translate-x-1 transition-transform duration-300 ${tokens.text}`}
           >
@@ -74,7 +74,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 rel="noreferrer"
                 onClick={stopBubbling}
                 title={`Open the live ${project.title} site`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-[10px] font-mono uppercase tracking-wider text-white/70 hover:text-white transition"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-muted hover:text-fg transition"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 Live
@@ -88,7 +88,7 @@ export default function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 rel="noreferrer"
                 onClick={stopBubbling}
                 title={`${project.title} ${repo.label} source on GitHub`}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/25 text-[10px] font-mono uppercase tracking-wider text-white/70 hover:text-white transition"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-fg/5 hover:bg-fg/10 border border-fg/10 hover:border-fg/25 text-[10px] font-mono uppercase tracking-wider text-muted hover:text-fg transition"
               >
                 <Github className="w-3.5 h-3.5" />
                 {repo.label}

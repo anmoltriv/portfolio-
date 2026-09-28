@@ -3,8 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <link rel="icon" type="image/svg+xml" href="/assets/Group 1000002399.svg" />
     <title>Anmol's Portfolio</title>
+    <script>
+      try {
+        if (localStorage.getItem("theme") === "light") {
+          document.documentElement.classList.add("light");
+          var glow = localStorage.getItem("light-glow");
+          document.documentElement.dataset.glow =
+            glow === "azure" || glow === "violet" || glow === "sage" ? glow : "sage";
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

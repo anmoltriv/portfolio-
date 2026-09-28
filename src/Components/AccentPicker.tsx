@@ -1,9 +1,12 @@
 import { motion } from "motion/react";
-import { ACCENT_PICKER } from "../theme/accent";
+import { DARK_ACCENT_PICKER, LIGHT_ACCENT_PICKER } from "../theme/accent";
 import { useAccent } from "../theme/AccentContext";
+import { useTheme } from "../theme/ThemeContext";
 
 export default function AccentPicker() {
+  const { theme } = useTheme();
   const { accent, setAccent, tokens } = useAccent();
+  const options = theme === "light" ? LIGHT_ACCENT_PICKER : DARK_ACCENT_PICKER;
 
   return (
     <motion.div
@@ -12,10 +15,10 @@ export default function AccentPicker() {
       transition={{ delay: 0.45, duration: 1 }}
       className="mt-8 flex items-center gap-3"
     >
-      <span className="text-[10px] font-mono tracking-widest text-white/40 uppercase">
+      <span className="text-[10px] font-mono tracking-widest text-faint uppercase">
         Glow Mode:
       </span>
-      {ACCENT_PICKER.map((option) => (
+      {options.map((option) => (
         <button
           key={option.name}
           onClick={() => setAccent(option.name)}

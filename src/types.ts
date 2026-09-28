@@ -17,7 +17,6 @@ export interface Project {
   metrics?: { label: string; value: string };
   demoLink?: string;
   repos: ProjectLink[];
-  featured: boolean;
 }
 
 export interface Experience {

@@ -92,26 +92,6 @@ const BRANDS: BrandEntry[] = [
     )
   },
   {
-    keywords: ["mongo"],
-    color: "#13AA52",
-    icon: (
-      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2c-.5 0-9 4.5-9 10a9 9 0 0 0 9 9c.5 0 9-4.5 9-10A9 9 0 0 0 12 2z" />
-        <path d="M12 2v20" />
-      </svg>
-    )
-  },
-  {
-    keywords: ["redux"],
-    color: "#764ABC",
-    icon: (
-      <svg className={ICON_CLASS} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M8 12a4 4 0 1 1 8 0 4 4 0 0 1-8 0" />
-      </svg>
-    )
-  },
-  {
     keywords: ["typescript"],
     color: "#3178C6",
     icon: (
@@ -172,14 +152,14 @@ export default function TechBadge({ tag }: { tag: string }) {
   const brand = resolveBrand(tag);
 
   return (
-    <div className="group/badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.03] hover:bg-white/[0.07] border border-white/5 text-[10.5px] font-mono tracking-wide text-white/50 hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 cursor-default">
+    <div className="group/badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-fg/[0.03] hover:bg-fg/[0.07] border border-fg/5 text-[10.5px] font-mono tracking-wide text-muted hover:text-fg hover:scale-105 active:scale-95 transition-all duration-300 cursor-default">
       <span
         className="transition-all duration-500 filter grayscale opacity-60 group-hover/badge:grayscale-0 group-hover/badge:opacity-100"
         style={{ color: brand.color }}
       >
         {brand.icon}
       </span>
-      <span className="group-hover/badge:text-white transition-colors duration-300">{tag}</span>
+      <span className="group-hover/badge:text-fg transition-colors duration-300">{tag}</span>
     </div>
   );
 }

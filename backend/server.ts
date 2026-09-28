@@ -3,13 +3,8 @@ import cors from "cors";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 dotenv.config();
-import path from "path";
 import { connectDB, pgClient } from "./db";
-
-// Import profile from repo root
 import { ANMOL_PROFILE } from "./profile";
-import { connect } from "http2";
-
 
 async function startServer() {
   const app = express();
@@ -48,7 +43,6 @@ async function startServer() {
         });
       }
 
-      // 1. MODIFIED: Injected ANMOL_PROFILE dynamically into the system instruction
       const systemInstruction = `
 You are Anmol Trivedi's AI twin. 
 
