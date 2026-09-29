@@ -55,8 +55,24 @@ function addDays(date: Date, days: number): Date {
   return next;
 }
 
-export function buildEmptyWeeks(weekCount = HEATMAP_WEEK_COUNT): ContributionDay[][] {
-  const currentWeekStart = startOfWeekSunday(new Date());
+export function shiftISODate(isoDate: string, days: number): string {
+  return formatISODate(addDays(parseLocalDate(isoDate), days));
+}
+
+/**
+ * Calendar day used to anchor the grid. Shifted toward UTC+14 so a contribution
+ * made "today" in Asia is already inside the window while UTC is still yesterday.
+ */
+export function contributionReferenceDate(now = new Date()): Date {
+  const shifted = new Date(now.getTime() + 14 * 60 * 60 * 1000);
+  return new Date(shifted.getUTCFullYear(), shifted.getUTCMonth(), shifted.getUTCDate());
+}
+
+export function buildEmptyWeeks(
+  weekCount = HEATMAP_WEEK_COUNT,
+  today = contributionReferenceDate()
+): ContributionDay[][] {
+  const currentWeekStart = startOfWeekSunday(today);
   const weeks: ContributionDay[][] = [];
 
   for (let week = weekCount - 1; week >= 0; week -= 1) {
@@ -69,6 +85,19 @@ export function buildEmptyWeeks(weekCount = HEATMAP_WEEK_COUNT): ContributionDay
   }
 
   return weeks;
+}
+
+export function weeksFromCounts(
+  counts: ReadonlyMap<string, number>,
+  weekCount = HEATMAP_WEEK_COUNT
+): ContributionDay[][] {
+  return buildEmptyWeeks(weekCount).map((week) =>
+    week.map((day) => ({ date: day.date, count: counts.get(day.date) ?? 0 }))
+  );
+}
+
+export function totalContributions(weeks: ContributionDay[][]): number {
+  return weeks.reduce((sum, week) => sum + week.reduce((daySum, day) => daySum + day.count, 0), 0);
 }
 
 export function monthLabel(isoDate: string): string {

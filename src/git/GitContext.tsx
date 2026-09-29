@@ -15,15 +15,16 @@ interface GitContextValue {
 
 const GitContext = createContext<GitContextValue | null>(null);
 
+const CONTRIBUTION_PATH = "/api/github-contributions";
+const REFRESH_MS = 5 * 60 * 1000;
+
 let calendarRequest: Promise<GitCalendar> | null = null;
 
-async function fetchGitCalendar(): Promise<GitCalendar> {
-  if (!API_BASE_URL) {
-    throw new Error("API base URL is not configured.");
-  }
-
-  const res = await fetch(`${API_BASE_URL}/api/github-contributions`, {
-    headers: { Accept: "application/json" }
+async function readCalendar(url: string): Promise<GitCalendar> {
+  const res = await fetch(url, {
+    headers: { Accept: "application/json" },
+    cache: "no-store",
+    signal: AbortSignal.timeout(12000)
   });
 
   if (!res.ok) {
@@ -35,8 +36,24 @@ async function fetchGitCalendar(): Promise<GitCalendar> {
   return parsed;
 }
 
-function loadGitCalendar(): Promise<GitCalendar> {
-  if (!calendarRequest) {
+async function fetchGitCalendar(): Promise<GitCalendar> {
+  const urls = [CONTRIBUTION_PATH];
+  if (API_BASE_URL) urls.push(`${API_BASE_URL}${CONTRIBUTION_PATH}`);
+
+  let lastError: unknown;
+  for (const url of urls) {
+    try {
+      return await readCalendar(url);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error("GitHub contributions request failed.");
+}
+
+function loadGitCalendar(force = false): Promise<GitCalendar> {
+  if (force || !calendarRequest) {
     calendarRequest = fetchGitCalendar().catch((error) => {
       calendarRequest = null;
       throw error;
@@ -56,18 +73,24 @@ export function GitProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let active = true;
 
-    loadGitCalendar()
-      .then((next) => {
-        if (!active) return;
-        setCalendar(next);
-        setStatus("ready");
-      })
-      .catch(() => {
-        if (active) setStatus("unavailable");
-      });
+    const pull = (force: boolean) => {
+      loadGitCalendar(force)
+        .then((next) => {
+          if (!active) return;
+          setCalendar(next);
+          setStatus("ready");
+        })
+        .catch(() => {
+          if (!active) return;
+          setStatus((current) => (current === "ready" ? "ready" : "unavailable"));
+        });
+    };
 
+    pull(false);
+    const timer = window.setInterval(() => pull(true), REFRESH_MS);
     return () => {
       active = false;
+      window.clearInterval(timer);
     };
   }, []);
 
