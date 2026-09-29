@@ -3,6 +3,7 @@ import type { Project } from "./types";
 import { AccentProvider, useAccent } from "./theme/AccentContext";
 import { ThemeProvider } from "./theme/ThemeContext";
 import { ChatProvider } from "./chat/ChatContext";
+import { GitProvider } from "./git/GitContext";
 import { useScrollToTopOnLoad } from "./hooks/useScrollToTopOnLoad";
 import AmbientOrbs from "./Components/AmbientOrbs";
 import Header from "./Components/Header";
@@ -49,7 +50,9 @@ export default function App() {
     <ThemeProvider>
       <AccentProvider>
         <ChatProvider>
-          <Portfolio />
+          <GitProvider>
+            <Portfolio />
+          </GitProvider>
         </ChatProvider>
       </AccentProvider>
     </ThemeProvider>

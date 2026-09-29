@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import { connectDB, pgClient } from "./db";
 import { ANMOL_PROFILE } from "./profile";
+import { fetchContributionCalendar } from "../src/git/fetchCalendar";
 
 async function startServer() {
   const app = express();
@@ -18,6 +19,7 @@ async function startServer() {
 
   const apiKey = process.env.GEMINI_API_KEY;
   console.log("GEMINI_API_KEY present:", !!apiKey);
+  console.log("GITHUB_TOKEN present:", !!process.env.GITHUB_TOKEN);
 
   const ai = new GoogleGenAI({
     apiKey: apiKey || "",
@@ -100,6 +102,17 @@ If information is not present in the provided profile context, explicitly say:
       return res
         .status(500)
         .json({ error: error.message || "Failed to generate response." });
+    }
+  });
+
+  app.get("/api/github-contributions", async (_req, res) => {
+    try {
+      const body = await fetchContributionCalendar();
+      res.setHeader("Cache-Control", "public, max-age=60");
+      return res.json(body);
+    } catch (error) {
+      console.error("GitHub contributions fetch failed:", error);
+      return res.status(502).json({ error: "Failed to load GitHub contributions." });
     }
   });
 
